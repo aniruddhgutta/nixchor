@@ -57,10 +57,13 @@
 
     # text editor
     helix
-    clang-tools
+    nixd
+    nixfmt
+    clang-tools  # clangd, clang-format
     lldb
-    nil
+    rustup  # rustc, cargo, rustfmt
     markdown-oxide
+    bash-language-server
     shfmt
 
     # media playback
