@@ -10,7 +10,7 @@
 
     gc = {
       automatic = true;
-      options = "--delete-older-than 7d --delete-generations 5";
+      options = "--delete-older-than 7d";
     };
 
     settings = {
