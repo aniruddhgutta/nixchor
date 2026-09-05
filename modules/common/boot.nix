@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   boot = {
@@ -14,14 +14,8 @@
 
     # kernel
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = [
-      "intel_idle.max_cstate=1"  # workaround for ideapad pro 5 black screening
-      "pcie_port_pm=off"         # workaround for intel be200 not waking up from sleep
-      "i915.force_probe=!7d51"   # force xe driver
-      "xe.force_probe=7d51"
-    ];
+    kernel.sysctl."kernel.sysrq" = 1;
     consoleLogLevel = 3;
-    kexec.enable = false;
     tmp.useTmpfs = true;
   };
 
