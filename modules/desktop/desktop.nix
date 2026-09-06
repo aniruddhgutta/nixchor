@@ -38,7 +38,4 @@
     gvfs.enable = true;
     udisks2.enable = true;
   };
-
-  # enable flaptak
-  services.flatpak.enable = true;
 }
