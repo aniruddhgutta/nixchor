@@ -67,4 +67,7 @@
     gamescope
     gamemode
   ];
+
+  # enable flatpak for nix-flaptak
+  services.flatpak.enable = true;
 }

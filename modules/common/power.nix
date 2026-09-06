@@ -17,7 +17,8 @@
 
         CPU_BOOST_ON_AC = 1;
         CPU_BOOST_ON_BAT = 0;
-        CPU_MAX_PERF_ON_BAT = 60;
+        CPU_HWP_DYN_BOOST_ON_AC = 1;
+        CPU_HWP_DYN_BOOST_ON_BAT = 0;
 
         INTEL_GPU_POWER_PROFILE_ON_AC = "base";
         INTEL_GPU_POWER_PROFILE_ON_BAT = "power_saving";
