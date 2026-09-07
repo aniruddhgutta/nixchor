@@ -1,7 +1,10 @@
 { pkgs, ... }:
 
 {
-  imports = [ ./hardware-configuration.nix ];
+  imports = [
+    ./hardware-configuration.nix
+    ../../modules/desktop/lpmd.nix
+  ];
 
   networking.hostName = "nixey";
   system.stateVersion = "26.05";
@@ -16,6 +19,14 @@
     ];
   };
   hardware.enableRedistributableFirmware = true;
+
+  # enable intel-lpmd
+  nixpkgs.overlays = [
+    (final: prev: {
+      intel-lpmd = final.callPackage ../../pkgs/intel-lpmd/package.nix { };
+    })
+  ];
+  services.lpmd.enable = true;
 
   # fix race conditions (fuck intel)
   boot.kernelParams = [
