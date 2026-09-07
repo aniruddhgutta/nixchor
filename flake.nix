@@ -13,6 +13,8 @@
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
 
+    affinity-nix.url = "github:mrshmllow/affinity-nix";
+
   };
 
   outputs = { nixpkgs, ... }@inputs:

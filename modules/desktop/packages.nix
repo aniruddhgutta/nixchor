@@ -1,6 +1,7 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 
 {
+  nixpkgs.overlays = [ inputs.affinity-nix.overlays.default ];
   environment.systemPackages = with pkgs; [
     # niri / wayland desktop
     awww
@@ -48,6 +49,7 @@
     swayimg
 
     # dev / creative
+    affinity-v3
     blender
     codeblocks
     clang

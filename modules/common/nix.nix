@@ -14,6 +14,7 @@
     };
 
     settings = {
+      # aggressive gc
       min-free = 1 * 1024 * 1024 * 1024;
       max-free = 5 * 1024 * 1024 * 1024;
       keep-outputs = false;
