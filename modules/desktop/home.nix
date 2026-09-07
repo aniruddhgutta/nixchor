@@ -12,14 +12,15 @@
       uninstallUnmanaged = true;
       update.onActivation = true;
       packages = [
-        "com.discordapp.Discord"
         "com.github.tchx84.Flatseal"
+        "io.github.nozwock.Packet"
+        "com.discordapp.Discord"
         "sh.cider.Cider"
         "com.spotify.Client"
-        "com.usebottles.bottles"
         "io.github.alainm23.planify"
-        "io.github.nozwock.Packet"
+        "org.onlyoffice.desktopeditors"
         "md.obsidian.Obsidian"
+        "com.usebottles.bottles"
         "org.prismlauncher.PrismLauncher"
         "org.vinegarhq.Sober"
         "sh.ppy.osu"
