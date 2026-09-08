@@ -4,6 +4,7 @@
   nixpkgs.overlays = [ inputs.affinity-nix.overlays.default ];
   environment.systemPackages = with pkgs; [
     # niri / wayland desktop
+    xwayland-satellite
     awww
     waybar
     fuzzel
@@ -17,6 +18,7 @@
     slurp
     playerctl
     nwg-look
+    quickshell
 
     # cli / tui
     foot
