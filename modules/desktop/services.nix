@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 # mirroring my dinit setup -
 # https://codeberg.org/oceanicc/petrichor/src/branch/main/.config/dinit.d
 
@@ -7,7 +7,7 @@ let
     inherit after;
     partOf = wants;
     wantedBy = wants;
-    environment.PATH = "/run/current-system/sw/bin";
+    environment.PATH = lib.mkForce "/run/current-system/sw/bin";
     serviceConfig = {
       ExecStart = exec;
       Restart = "on-failure";
