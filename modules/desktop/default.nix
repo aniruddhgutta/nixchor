@@ -5,5 +5,6 @@
     ./fonts.nix
     ./home.nix
     ./packages.nix
+    ./services.nix
   ];
 }
