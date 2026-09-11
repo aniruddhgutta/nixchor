@@ -7,10 +7,10 @@ let
     inherit after;
     partOf = wants;
     wantedBy = wants;
-    environment.PATH = lib.mkForce "/run/current-system/sw/bin";
+    environment.PATH = lib.mkForce "/run/wrappers/bin:/run/current-system/sw/bin:/run/current-system/sw/sbin";
     serviceConfig = {
       ExecStart = exec;
-      Restart = "on-failure";
+      Restart = "always";
     };
   };
 in
