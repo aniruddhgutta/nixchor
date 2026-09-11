@@ -18,7 +18,7 @@ in
     services.upower.enable = true;
     systemd.services.intel_lpmd = {
       wantedBy = [ "multi-user.target" ];
-      # /run/intel_lpmd is tmpfs, gone every boot — systemd has to
+      # /run/intel_lpmd is tmpfs, gone every boot - systemd has to
       # (re)create it before ExecStart, not us.
       serviceConfig.RuntimeDirectory = "intel_lpmd";
     };

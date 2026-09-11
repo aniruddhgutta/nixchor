@@ -3,7 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/desktop/lpmd.nix
+    ../../pkgs/intel-lpmd/module.nix
   ];
 
   networking.hostName = "nixey";
