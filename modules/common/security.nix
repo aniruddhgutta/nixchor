@@ -24,16 +24,6 @@
 
     # enable polkit
     polkit.enable = true;
-
-    # increase ulimit for games
-    pam.loginLimits = [
-      {
-        domain = "@users";
-        item = "memlock";
-        type = "-";
-        value = "unlimited";
-      }
-    ];
   };
 
   # configure gnugpg
