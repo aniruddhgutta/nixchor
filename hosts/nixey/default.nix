@@ -21,13 +21,13 @@
   };
   hardware.enableRedistributableFirmware = true;
 
-  # enable intel-lpmd
+  # enable intel-lpmd's overlay
   nixpkgs.overlays = [
     (final: prev: {
       intel-lpmd = final.callPackage ../../pkgs/intel-lpmd/package.nix { };
     })
   ];
-  services.lpmd.enable = true;
+  services.lpmd.enable = false;
 
   # fix race conditions (fuck intel)
   boot.kernelParams = [

@@ -16,8 +16,6 @@
       enable = true;
       trustedInterfaces = [ config.services.tailscale.interfaceName ];
     };
-
-    nftables.enable = true;
   };
   services.resolved.enable = true;
 

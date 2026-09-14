@@ -20,6 +20,12 @@
     tmp.useTmpfs = true;
   };
 
+  # zram
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+  };
+
   # console colors (mystbloom)
   console.colors = [
     "141416" "a3697d" "9aaa9e" "d1bea5" "9f8ac6" "cda2d4" "8a9ca0" "c7c9cc"
