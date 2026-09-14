@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   # configure iwd, disable networkmanager and dhcpcd
@@ -23,7 +23,7 @@
 
   # configure networkd
   systemd.network = {
-    wait-online.anyInterface = true;
+    wait-online.enable = false;
     networks."25-wlan" = {
       matchConfig.Type = "wlan";
       networkConfig.DHCP = "yes";
@@ -37,6 +37,12 @@
     openFirewall = true;
     authKeyFile = "/run/secrets/tailscale_key";
     extraUpFlags = [ "--ssh" ];
+  };
+
+  # make tailscale on-demand
+  systemd.services = {
+    tailscaled.wantedBy = lib.mkForce [ ];
+    tailscaled-autoconnect.wantedBy = lib.mkForce [ ];
   };
 
   # configure cloudflare warp
