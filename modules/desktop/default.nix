@@ -6,5 +6,6 @@
     ./fonts.nix
     ./packages.nix
     ./services.nix
+    ../homelab/containers.nix
   ];
 }
