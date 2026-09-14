@@ -35,6 +35,7 @@
   # disable useless services, enable nautilus-related services
   services = {
     gnome.gnome-keyring.enable = false;
+    gnome.sushi.enable = true;
     gvfs.enable = true;
     udisks2.enable = true;
   };
