@@ -1,4 +1,7 @@
+{ inputs, ...}:
+
 {
+  nixpkgs.overlays = import ../../overlays inputs;
   imports = [
     ./boot.nix
     ./networking.nix

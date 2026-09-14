@@ -6,9 +6,10 @@
     # pin to current stable release
     nixpkgs.url = "nixpkgs/nixos-26.05";
 
-    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
+    # only for certain packages
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    affinity-nix.url = "github:mrshmllow/affinity-nix";
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
 
   };
 
