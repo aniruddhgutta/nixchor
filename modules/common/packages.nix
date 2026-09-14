@@ -8,6 +8,7 @@
     sbctl
     git
     git-lfs
+    killall
 
     # shell
     yash

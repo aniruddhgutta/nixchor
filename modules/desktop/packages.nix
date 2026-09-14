@@ -28,7 +28,8 @@
 
     # file management
     nautilus
-    libheif
+    ffmpegthumbnailer
+    libheif.out
     xdg-utils
 
     # dev
