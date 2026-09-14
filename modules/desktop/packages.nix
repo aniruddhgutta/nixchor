@@ -1,7 +1,6 @@
-{ inputs, pkgs, ... }:
+{ pkgs, ... }:
 
 {
-  nixpkgs.overlays = [ inputs.affinity-nix.overlays.default ];
   environment.systemPackages = with pkgs; [
     # niri / wayland desktop
     xwayland-satellite
@@ -32,11 +31,10 @@
     libheif
     xdg-utils
 
-    # coding / lsps
-    clang-tools  # clangd, clang-format
-    rustup       # rustc, cargo, rustfmt
-    lldb
-    markdown-oxide
+    # dev
+    gnumake
+    clang
+    clang-tools
 
     # media
     mpv
@@ -44,17 +42,14 @@
     mpdris2-rs
     mpdscribble
     rmpc
-    spotify-player
 
     # document / image viewers
     zathura
     swayimg
 
-    # dev / creative
-    affinity-v3
+    # creative
+    gimp
     blender
-    codeblocks
-    clang
     ffmpeg
 
     # theming
@@ -63,13 +58,10 @@
     adw-gtk3
 
     # misc apps
-    brave
+    unstable.brave-origin
     gnome-calculator
+    codeblocks
     senpai
-
-    # gaming
-    gamescope
-    gamemode
   ];
 
   # enable flatpak for nix-flaptak
