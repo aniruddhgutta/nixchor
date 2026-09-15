@@ -53,6 +53,7 @@
     gimp
     blender
     ffmpeg
+    obs-studio
 
     # theming
     adwaita-icon-theme
