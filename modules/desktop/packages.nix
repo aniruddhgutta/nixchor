@@ -36,6 +36,7 @@
     gnumake
     clang
     clang-tools
+    kdePackages.qtdeclarative
 
     # media
     mpv

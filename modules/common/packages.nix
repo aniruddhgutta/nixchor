@@ -38,6 +38,9 @@
     nixfmt
     bash-language-server
     shfmt
-    kdePackages.qtdeclarative
+
+    # nix
+    nix-tree
+    nh
   ];
 }
