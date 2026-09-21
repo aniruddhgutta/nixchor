@@ -3,7 +3,7 @@
 {
   fonts = {
     packages = with pkgs; [
-      iosevka-bin
+      iosevka
       jetbrains-mono
       cozette
       nerd-fonts.symbols-only
