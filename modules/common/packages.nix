@@ -36,7 +36,6 @@
     helix
     nixd
     nixfmt
-    bash-language-server
     shfmt
 
     # nix
