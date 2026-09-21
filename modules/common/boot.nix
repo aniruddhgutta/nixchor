@@ -8,6 +8,7 @@
       timeout = 0;
       systemd-boot = {
         enable = true;
+        graceful = true;
         consoleMode = "max";
         configurationLimit = 10;
       };
