@@ -1,16 +1,26 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
   boot = {
-    # systemd-boot
     loader = {
       efi.canTouchEfiVariables = true;
       timeout = 0;
+      # systemd-boot (used by lanzaboote)
       systemd-boot = {
-        enable = true;
-        graceful = true;
+        enable = lib.mkForce false;
         consoleMode = "max";
         configurationLimit = 10;
+      };
+    };
+
+    # lanzaboote
+    lanzaboote = {
+      enable = true;
+      pkiBundle = "/var/lib/sbctl";
+      autoGenerateKeys.enable = true;
+      autoEnrollKeys = {
+        enable = true;
+        autoReboot = true;
       };
     };
 
