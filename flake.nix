@@ -1,4 +1,3 @@
-# flake.nix
 {
   description = "oceanicc's petrichor but nix-ified";
 
