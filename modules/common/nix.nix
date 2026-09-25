@@ -1,8 +1,11 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   # configure nix
   nix = {
+    # swap nix for lix
+    package = pkgs.lixPackageSets.stable.lix;
+
     optimise = {
       automatic = true;
       dates = [ "weekly" ];
