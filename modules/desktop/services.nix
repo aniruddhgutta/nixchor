@@ -42,7 +42,7 @@ in
     };
     swayidle = mkSvc {
       exec = "${pkgs.swayidle}/bin/swayidle";
-      wants = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
     };
     waybar = mkSvc {
       exec = "${pkgs.waybar}/bin/waybar";
