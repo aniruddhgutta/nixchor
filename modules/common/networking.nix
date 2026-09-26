@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   # configure iwd, disable networkmanager and dhcpcd
@@ -52,11 +57,9 @@
   # configure bluetooth
   hardware.bluetooth = {
     enable = true;
-    settings = {
-    	General = {
-    	  Enable = "Source,Sink,Media,Socket";
-    		Experimental = true;
-    	};
+    settings.General = {
+      Enable = "Source,Sink,Media,Socket";
+      Experimental = true;
     };
   };
 }

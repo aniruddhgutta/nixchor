@@ -17,10 +17,16 @@
     };
   };
 
-  outputs = { nixpkgs, ... }@inputs:
+  outputs =
+    { nixpkgs, ... }@inputs:
     # remove boilerplate
     let
-      mkHost = { hostname, system ? "x86_64-linux", extraModules ? [] }:
+      mkHost =
+        {
+          hostname,
+          system ? "x86_64-linux",
+          extraModules ? [ ],
+        }:
         nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs; };
@@ -29,7 +35,8 @@
             ./modules/common
             ./hosts/${hostname}
             inputs.lanzaboote.nixosModules.lanzaboote
-          ] ++ extraModules;
+          ]
+          ++ extraModules;
         };
     in
     {

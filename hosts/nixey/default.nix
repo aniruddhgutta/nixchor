@@ -31,9 +31,9 @@
 
   # fix race conditions (fuck intel)
   boot.kernelParams = [
-    "intel_idle.max_cstate=1"  # workaround for ideapad pro 5 black screening
-    "pcie_port_pm=off"         # workaround for intel be200 not waking up from sleep
-    "i915.force_probe=!7d51"   # force xe driver
+    "intel_idle.max_cstate=1" # workaround for ideapad pro 5 black screening
+    "pcie_port_pm=off"        # workaround for intel be200 not waking up from sleep
+    "i915.force_probe=!7d51"  # force xe driver
     "xe.force_probe=7d51"
   ];
 }

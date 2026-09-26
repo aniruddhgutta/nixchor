@@ -9,8 +9,8 @@
       enable = true;
       pd.enable = true;
       settings = {
-        MEM_SLEEP_ON_PRF= "s2idle";
-        MEM_SLEEP_ON_BAT= "s2idle";
+        MEM_SLEEP_ON_PRF = "s2idle";
+        MEM_SLEEP_ON_BAT = "s2idle";
 
         CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
         CPU_ENERGY_PERF_POLICY_ON_BAT = "power";

@@ -3,16 +3,22 @@
 # https://codeberg.org/oceanicc/petrichor/src/branch/main/.config/dinit.d
 
 let
-  mkSvc = { exec, after ? [ ], wants ? after }: {
-    inherit after;
-    partOf = wants;
-    wantedBy = wants;
-    environment.PATH = lib.mkForce "/run/wrappers/bin:/run/current-system/sw/bin:/run/current-system/sw/sbin";
-    serviceConfig = {
-      ExecStart = exec;
-      Restart = "always";
+  mkSvc =
+    {
+      exec,
+      after ? [ ],
+      wants ? after,
+    }:
+    {
+      inherit after;
+      partOf = wants;
+      wantedBy = wants;
+      environment.PATH = lib.mkForce "/run/wrappers/bin:/run/current-system/sw/bin:/run/current-system/sw/sbin";
+      serviceConfig = {
+        ExecStart = exec;
+        Restart = "always";
+      };
     };
-  };
 in
 {
   systemd.user.services = {
@@ -46,7 +52,10 @@ in
     };
     waybar = mkSvc {
       exec = "${pkgs.waybar}/bin/waybar";
-      after = [ "dbus.service" "graphical-session.target" ];
+      after = [
+        "dbus.service"
+        "graphical-session.target"
+      ];
     };
   };
 }

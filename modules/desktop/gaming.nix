@@ -1,4 +1,4 @@
-{ pkgs, ...}:
+{ pkgs, ... }:
 
 {
   # enable steam with proton-ge

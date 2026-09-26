@@ -1,4 +1,4 @@
-{...}:
+{ ... }:
 
 {
   virtualisation.docker.rootless = {
