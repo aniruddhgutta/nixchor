@@ -17,7 +17,6 @@
     slurp
     playerctl
     nwg-look
-    quickshell
 
     # cli / tui
     foot
@@ -36,23 +35,24 @@
     gnumake
     clang
     clang-tools
-    kdePackages.qtdeclarative
 
     # media
-    mpv
+    mpv-unwrapped
     mpd
     mpdris2-rs
     mpdscribble
     rmpc
 
     # document / image viewers
-    zathura
+    (pkgs.zathura.override {
+      plugins = [ pkgs.zathuraPkgs.zathura_pdf_poppler ];
+    })
     swayimg
 
     # creative
     gimp
     blender
-    ffmpeg
+    ffmpeg-headless
     obs-studio
 
     # theming
@@ -63,7 +63,6 @@
     # misc apps
     unstable.brave-origin
     gnome-calculator
-    codeblocks
     senpai
   ];
 
