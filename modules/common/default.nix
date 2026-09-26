@@ -14,4 +14,10 @@
 
   # set timezone
   time.timeZone = "Asia/Kolkata";
+
+  # disable html and info documentation
+  documentation = {
+    doc.enable = false;
+    info.enable = false;
+  };
 }
