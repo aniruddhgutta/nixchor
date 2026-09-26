@@ -1,6 +1,10 @@
-{ pkgs, ...}:
+{ lib, pkgs, ...}:
 
 {
+  # disable defaults
+  environment.defaultPackages = lib.mkForce [ ];
+  programs.nano.enable = false;
+
   environment.systemPackages = with pkgs; [
     # core
     doas-sudo-shim
@@ -23,6 +27,7 @@
     poppler
 
     # cli
+    rsync
     brightnessctl
     aria2
 
