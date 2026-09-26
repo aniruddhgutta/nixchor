@@ -6,14 +6,9 @@
     # swap nix for lix
     package = pkgs.lixPackageSets.stable.lix;
 
-    optimise = {
-      automatic = true;
-      dates = [ "weekly" ];
-    };
-
     gc = {
       automatic = true;
-      options = "--delete-older-than 7d";
+      options = "-d";
     };
 
     settings = {
@@ -22,16 +17,24 @@
       max-free = 5 * 1024 * 1024 * 1024;
       keep-outputs = false;
       keep-derivations = false;
-      experimental-features = [ "nix-command" "flakes" ];
-    };
-  };
+      auto-optimise-store = true;
 
-  # sync nix-optimise with nix-gc
-  systemd.services.nix-optimise.after = [ "nix-gc.service" ];
+      # enable flakes
+      experimental-features = [ "nix-command" "flakes" ];
+
+      # enable cachix
+      substituters = [
+        "https://nix-community.cachix.org"
+        "https://lanzaboote.cachix.org"
+      ];
+      trusted-public-keys = [
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+        "lanzaboote.cachix.org-1:Nt9//zGmqkg1k5iu+B3bkj3OmHKjSw9pvf3faffLLNk="
+      ];
+    };
+
+  };
 
   # allow unfree packages in nixpkgs
   nixpkgs.config.allowUnfree = true;
-
-  # disable nixos-help's html manual
-  documentation.doc.enable = false;
 }
