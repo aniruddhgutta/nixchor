@@ -25,16 +25,10 @@
   programs.niri.enable = true;
   xdg.portal.config.common.default = [ "gtk" ];
 
-  # configuring nautilus
-  environment.pathsToLink = [ "share/thumbnailers" ];
-  programs.nautilus-open-any-terminal = {
-    enable = true;
-    terminal = "foot";
-  };
-
   # disable useless services, enable nautilus-related services
   services = {
     gnome.gnome-keyring.enable = false;
+    speechd.enable = false;
     gnome.sushi.enable = true;
     gvfs.enable = true;
     udisks2.enable = true;
