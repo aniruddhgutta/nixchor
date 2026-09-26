@@ -1,0 +1,4 @@
+*          text=auto eol=lf
+*.json     linguist-detectable
+.git*      linguist-language=Shell
+flake.lock linguist-language=JSON linguist-generated
