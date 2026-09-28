@@ -64,6 +64,6 @@
   ];
 
   # logging
-  services.journald.extraConfig = "SystemMaxUse=50M";
+  services.journald.settings.Journal.SystemMaxUse = "50M";
   services.logrotate.enable = false;
 }

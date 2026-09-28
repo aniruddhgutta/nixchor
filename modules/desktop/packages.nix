@@ -64,7 +64,7 @@
     adw-gtk3
 
     # misc apps
-    unstable.brave-origin
+    brave-origin
     gnome-calculator
     senpai
   ];

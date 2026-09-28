@@ -2,12 +2,7 @@
   description = "oceanicc's petrichor but nix-ified";
 
   inputs = {
-    # pin to current stable release
-    nixpkgs.url = "nixpkgs/nixos-26.05";
-
-    # only for certain packages
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
   };
 
