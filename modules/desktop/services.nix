@@ -1,4 +1,9 @@
-{ pkgs, lib, ... }:
+{
+  lib,
+  pkgs,
+  ...
+}:
+
 # mirroring my dinit setup -
 # https://codeberg.org/oceanicc/petrichor/src/branch/main/.config/dinit.d
 
