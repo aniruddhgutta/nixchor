@@ -9,12 +9,6 @@
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
-
-    # secure boot with systemd-boot
-    lanzaboote = {
-      url = "github:nix-community/lanzaboote/v1.1.0";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
   };
 
   outputs =
@@ -34,7 +28,6 @@
             # default modules
             ./modules/common
             ./hosts/${hostname}
-            inputs.lanzaboote.nixosModules.lanzaboote
           ]
           ++ extraModules;
         };

@@ -39,4 +39,11 @@
     "i915.force_probe=!7d51"  # force xe driver
     "xe.force_probe=7d51"
   ];
+
+  # add windows entry to limine
+  boot.loader.limine.extraEntries = ''
+    /Windows
+      protocol: efi_boot_entry
+      entry: Windows Boot Manager
+  '';
 }
