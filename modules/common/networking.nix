@@ -6,33 +6,22 @@
 }:
 
 {
-  # configure iwd, disable networkmanager and dhcpcd
   networking = {
-    networkmanager.enable = false;
+    # let iwd manage dhcp
     dhcpcd.enable = false;
 
-    useNetworkd = true;
+    # configure iwd
     wireless.iwd = {
       enable = true;
-      settings.Settings.AutoConnect = true;
+      settings = {
+        General.EnableNetworkConfiguration = true;    # use iwd's built in dhcp client
+        Network.NameResolvingService = "resolvconf";  # use openresolv (default is resolved)
+      };
     };
 
-    firewall = {
-      enable = true;
-      trustedInterfaces = [ config.services.tailscale.interfaceName ];
-    };
+    # allow tailnet peers to reach any port on this machine
+    firewall.trustedInterfaces = [ config.services.tailscale.interfaceName ];
   };
-  services.resolved.enable = true;
-
-  # configure networkd
-  systemd.network = {
-    wait-online.enable = false;
-    networks."25-wlan" = {
-      matchConfig.Type = "wlan";
-      networkConfig.DHCP = "yes";
-    };
-  };
-  boot.initrd.systemd.network.wait-online.enable = false;
 
   # configure tailscale
   services.tailscale = {
