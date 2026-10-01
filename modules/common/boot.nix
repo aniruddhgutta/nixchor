@@ -8,7 +8,7 @@
   boot = {
     loader = {
       efi.canTouchEfiVariables = true;
-      timeout = 0;
+      timeout = 3;
 
       # configure limine
       limine = {
