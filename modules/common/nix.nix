@@ -1,4 +1,5 @@
 {
+  inputs,
   pkgs,
   ...
 }:
@@ -41,6 +42,9 @@
 
   };
 
-  # allow unfree packages in nixpkgs
-  nixpkgs.config.allowUnfree = true;
+  # allow unfree packages, import overlays
+  nixpkgs = {
+    config.allowUnfree = true;
+    overlays = import ../../overlays inputs;
+  };
 }

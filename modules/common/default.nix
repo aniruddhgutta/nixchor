@@ -1,10 +1,4 @@
 {
-  inputs,
-  ...
-}:
-
-{
-  nixpkgs.overlays = import ../../overlays inputs;
   imports = [
     ./boot.nix
     ./networking.nix
@@ -14,6 +8,7 @@
     ./security.nix
     ./users.nix
   ];
+  # note: overlays are imported in nix.nix
 
   # set timezone
   time.timeZone = "Asia/Kolkata";
