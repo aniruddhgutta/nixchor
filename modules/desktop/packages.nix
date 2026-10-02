@@ -73,7 +73,4 @@
     gnome-calculator
     senpai
   ];
-
-  # enable flatpak for nix-flaptak
-  services.flatpak.enable = true;
 }

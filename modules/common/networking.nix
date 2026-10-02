@@ -19,6 +19,9 @@
       };
     };
 
+    # campus wifi sucks
+    enableIPv6 = false;
+
     # allow tailnet peers to reach any port on this machine
     firewall.trustedInterfaces = [ config.services.tailscale.interfaceName ];
   };
@@ -27,7 +30,7 @@
   services.tailscale = {
     enable = true;
     openFirewall = true;
-    authKeyFile = "/run/secrets/tailscale_key";
+    authKeyFile = "/etc/tailscale_key";
     extraUpFlags = [ "--ssh" ];
   };
 
