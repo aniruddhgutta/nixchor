@@ -71,6 +71,7 @@
     # misc apps
     brave-origin
     gnome-calculator
+    aerc
     senpai
   ];
 }
