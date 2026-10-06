@@ -7,7 +7,6 @@
     power-profiles-daemon.enable = false;
     tlp = {
       enable = true;
-      pd.enable = true;
       settings = {
         MEM_SLEEP_ON_PRF = "s2idle";
         MEM_SLEEP_ON_BAT = "s2idle";
