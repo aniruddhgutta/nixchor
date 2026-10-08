@@ -51,11 +51,8 @@
     tmp.useTmpfs = true;
   };
 
-  # zram
-  zramSwap = {
-    enable = true;
-    algorithm = "zstd";
-  };
+  # enable zram
+  zramSwap.enable = true;
 
   # console color palette (mystbloom)
   console.colors = [
@@ -64,6 +61,8 @@
   ];
 
   # logging
-  services.journald.settings.Journal.SystemMaxUse = "50M";
-  services.logrotate.enable = false;
+  services = {
+    journald.settings.Journal.SystemMaxUse = "50M";
+    logrotate.enable = false;
+  };
 }

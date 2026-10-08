@@ -57,10 +57,7 @@ in
     };
     waybar = mkSvc {
       exec = "${pkgs.waybar}/bin/waybar";
-      after = [
-        "dbus.service"
-        "graphical-session.target"
-      ];
+      after = [ "graphical-session.target" ];
     };
   };
 }

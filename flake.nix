@@ -33,7 +33,9 @@
         nixey = mkHost {
           hostname = "nixey";
           extraModules = [
-            ./modules/desktop
+            ./modules/niri
+            ./modules/flatpak.nix
+            ./modules/gaming.nix
           ];
         };
 

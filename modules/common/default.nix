@@ -1,17 +1,22 @@
 {
+  lib,
+  ...
+}:
+
+{
   imports = [
     ./boot.nix
     ./networking.nix
     ./nix.nix
     ./packages.nix
-    ./power.nix
+    ./tlp.nix
     ./security.nix
     ./users.nix
   ];
   # note: overlays are imported in nix.nix
 
   # set timezone
-  time.timeZone = "Asia/Kolkata";
+  time.timeZone = lib.mkDefault "Asia/Kolkata";
 
   # disable html and info documentation
   documentation = {

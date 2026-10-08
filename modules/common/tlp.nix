@@ -1,10 +1,9 @@
-{ ... }:
-
 {
   # configure tlp and thermald, disable ppd
   services = {
     thermald.enable = true;
     power-profiles-daemon.enable = false;
+
     tlp = {
       enable = true;
       settings = {

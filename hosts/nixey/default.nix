@@ -1,48 +1,23 @@
 {
-  pkgs,
+  config,
+  lib,
   ...
 }:
 
 {
   imports = [
     ./hardware-configuration.nix
-    ../../pkgs/intel-lpmd/module.nix
+    ./intel.nix
+    ./packages.nix
   ];
 
+  # hostname
   networking.hostName = "nixey";
   system.stateVersion = "26.05";
 
-  # configure intel-graphics
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-    extraPackages = with pkgs; [
-      intel-media-driver
-      vpl-gpu-rt
-      intel-compute-runtime
-    ];
-  };
-  hardware.enableRedistributableFirmware = true;
-
-  # enable intel-lpmd's overlay
-  nixpkgs.overlays = [
-    (final: prev: {
-      intel-lpmd = final.callPackage ../../pkgs/intel-lpmd/package.nix { };
-    })
-  ];
-  services.lpmd.enable = false;
-
-  # fix race conditions (fuck intel)
-  boot.kernelParams = [
-    "intel_idle.max_cstate=1" # workaround for ideapad pro 5 black screening
-    "pcie_port_pm=off"        # workaround for intel be200 not waking up from sleep
-    "i915.force_probe=!7d51"  # force xe driver
-    "xe.force_probe=7d51"
-  ];
-
   # add windows entry to limine
-  boot.loader.limine.extraEntries = ''
-    /Windows
+  boot.loader.limine.extraEntries = lib.mkIf (config.fileSystems ? "/mnt/windows") ''
+    /Windows 11
       protocol: efi_boot_entry
       entry: Windows Boot Manager
   '';

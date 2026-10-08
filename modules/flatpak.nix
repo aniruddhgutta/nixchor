@@ -17,7 +17,7 @@
       "sh.cider.Cider"
       "com.spotify.Client"
       "io.github.alainm23.planify"
-      "org.onlyoffice.desktopeditors"
+      "com.collaboraoffice.Office"
       "md.obsidian.Obsidian"
       "com.usebottles.bottles"
       "org.prismlauncher.PrismLauncher"

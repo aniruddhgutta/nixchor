@@ -1,6 +1,4 @@
 {
-  config,
-  lib,
   modulesPath,
   ...
 }:
@@ -19,6 +17,7 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
+  boot.supportedFilesystems = [ "ntfs" ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/5bcf83e5-ee5e-4850-8c68-e8b40b3db9db";
@@ -39,7 +38,18 @@
     ];
   };
 
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.intel.npu.enable = true;
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  fileSystems."/mnt/windows" = {
+    device = "/dev/disk/by-uuid/7800FD6600FD2BAE";
+    fsType = "ntfs-3g";
+    options = [
+      "rw"
+      "uid=1000"
+      "gid=100"
+      "nofail"
+      "x-systemd.automount"
+      "x-systemd.idle-timeout=60"
+    ];
+  };
+
+  swapDevices = [ ];
 }
