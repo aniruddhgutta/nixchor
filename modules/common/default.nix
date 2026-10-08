@@ -5,7 +5,8 @@
 
 {
   imports = [
-    ./boot.nix
+    ./kernel.nix
+    ./limine.nix
     ./networking.nix
     ./nix.nix
     ./packages.nix
