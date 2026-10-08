@@ -5,20 +5,16 @@
 }:
 
 {
-  # configure nix
   nix = {
     # swap nix for lix
     package = pkgs.lixPackageSets.stable.lix;
 
-    gc = {
-      automatic = true;
-      options = "-d";
-    };
-
     settings = {
-      # aggressive gc
+      # try freeing space upto 5gb when only 1gb is free
       min-free = 1 * 1024 * 1024 * 1024;
       max-free = 5 * 1024 * 1024 * 1024;
+
+      # aggressive gc
       keep-outputs = false;
       keep-derivations = false;
       auto-optimise-store = true;
@@ -38,6 +34,12 @@
       ];
     };
 
+  };
+
+  # enable nh and nh-clean
+  programs.nh.clean = {
+    enable = true;
+    extraArgs = "--keep 7 --keep-since 3d";
   };
 
   # allow unfree packages, import overlays

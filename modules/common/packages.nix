@@ -34,6 +34,7 @@
     rsync
     brightnessctl
     aria2
+    nix-tree
 
     # tui
     htop
@@ -46,9 +47,5 @@
     nixd
     nixfmt
     shfmt
-
-    # nix
-    nix-tree
-    nh
   ];
 }
