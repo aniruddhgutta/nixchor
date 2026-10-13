@@ -26,6 +26,15 @@
     firewall.trustedInterfaces = [ config.services.tailscale.interfaceName ];
   };
 
+  # configure bluetooth
+  hardware.bluetooth = {
+    enable = true;
+    settings.General = {
+      Enable = "Source,Sink,Media,Socket";
+      Experimental = true;
+    };
+  };
+
   # configure tailscale
   services.tailscale = {
     enable = true;
@@ -44,14 +53,5 @@
   services.cloudflare-warp = {
     enable = true;
     package = pkgs.cloudflare-warp.override { headless = true; };
-  };
-
-  # configure bluetooth
-  hardware.bluetooth = {
-    enable = true;
-    settings.General = {
-      Enable = "Source,Sink,Media,Socket";
-      Experimental = true;
-    };
   };
 }
