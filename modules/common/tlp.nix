@@ -5,6 +5,7 @@
     power-profiles-daemon.enable = false;
 
     tlp = {
+      pd.enable = true;
       enable = true;
       settings = {
         MEM_SLEEP_ON_PRF = "s2idle";
