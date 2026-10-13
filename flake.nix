@@ -20,6 +20,14 @@
           inherit system;
           specialArgs = { inherit inputs; };
           modules = [
+            # configure nixpkgs
+            {
+              nixpkgs = {
+                config.allowUnfree = true;
+                overlays = import ./overlays inputs;
+              };
+            }
+
             # default modules
             ./modules/common
             ./hosts/${hostname}

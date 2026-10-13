@@ -12,7 +12,7 @@
     # configure limine
     limine = {
       enable = true;
-      maxGenerations = 7;
+      maxGenerations = 10;
 
       # theme limine
       style = {
