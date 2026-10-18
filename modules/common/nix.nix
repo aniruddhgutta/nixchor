@@ -21,6 +21,9 @@
     
     # disable annoying git messages
     warn-dirty = false;
+
+    # declutter home
+    use-xdg-base-directories = true;
   };
 
   # enable nh and nh-clean
