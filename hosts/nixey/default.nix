@@ -11,8 +11,6 @@
     ./packages.nix
   ];
 
-  # hostname
-  networking.hostName = "nixey";
   system.stateVersion = "26.05";
 
   # add windows entry to limine
