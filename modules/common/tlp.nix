@@ -8,8 +8,7 @@
       pd.enable = true;
       enable = true;
       settings = {
-        MEM_SLEEP_ON_PRF = "s2idle";
-        MEM_SLEEP_ON_BAT = "s2idle";
+        MEM_SLEEP_ON_BAT = "deep";
 
         CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
         CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
@@ -21,6 +20,11 @@
 
         INTEL_GPU_POWER_PROFILE_ON_AC = "base";
         INTEL_GPU_POWER_PROFILE_ON_BAT = "power_saving";
+
+        RADEON_DPM_PERF_LEVEL_ON_AC = "auto";
+        RADEON_DPM_PERF_LEVEL_ON_BAT = "low";
+        AMDGPU_ABM_LEVEL_ON_AC = 0;
+        AMDGPU_ABM_LEVEL_ON_BAT = 3;
 
         DISK_APM_LEVEL_ON_BAT = "128 128";
         AHCI_RUNTIME_PM_ON_BAT = "auto";
