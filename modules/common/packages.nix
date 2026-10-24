@@ -1,19 +1,16 @@
 {
-  lib,
   pkgs,
   ...
 }:
 
 {
-  # disable defaults
-  environment.defaultPackages = lib.mkForce [ ];
-  programs.nano.enable = false;
-
   environment.systemPackages = with pkgs; [
     # core
+    mkpasswd
     doas-sudo-shim
     dash
     sbctl
+    gnupg
     git
     git-lfs
     killall
@@ -32,7 +29,6 @@
 
     # cli
     rsync
-    brightnessctl
     aria2
     nix-tree
 
@@ -47,5 +43,20 @@
     nixd
     nixfmt
     shfmt
+
+    # TODO: remove after testing
+    # nixos defaults
+    gnused
+    gnutar
+    gzip
+    bzip2
+    xz
+    zstd
+    diffutils
+    patch
+    iproute2
+    iputils
+    curl
+    openssh
   ];
 }
