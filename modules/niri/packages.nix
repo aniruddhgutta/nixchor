@@ -6,7 +6,6 @@
 {
   environment.systemPackages = with pkgs; [
     # niri
-    xwayland-satellite
     awww
     waybar
     fuzzel
@@ -32,6 +31,7 @@
 
     # nautilus
     nautilus
+    sushi
     ffmpegthumbnailer
     libheif.out
     xdg-utils

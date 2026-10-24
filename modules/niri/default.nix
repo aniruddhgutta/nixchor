@@ -1,27 +1,53 @@
 {
+  config,
+  modules,
+  lib,
+  pkgs,
+  ...
+}:
+
+{
   imports = [
     ./packages.nix
-    ./services.nix
+    ./xdg.nix
     ../fonts.nix
-    ../greetd.nix
     ../pipewire.nix
-  ];
-  
-  # enable niri, configure xdg-portals
-  programs.niri.enable = true;
-  xdg.portal.config.common.default = [ "gtk" ];
+    ../tuigreet.nix
 
-  # configure tuigreet
-  services.greetd.settings.initial_session = {
-    command = "niri-session";
+    # TODO: port to finit
+    # ./services.nix
+  ]
+  ++ (with modules; [
+    gvfs
+    niri
+    udisks2
+    xwayland-satellite
+  ]);
+  # note: we exclude
+  # - tuigreet since it's imported in tuigreet.nix
+  # - elogind since it's imported by default in finix
+
+  # enable niri with xwayland-satellite
+  programs = {
+    niri.enable = true;
+    xwayland-satellite.enable = true;
+  };
+
+  # TODO: there must be a better way to do this
+  # autolaunch niri if greetd is enabled
+  services.greetd.settings.initial_session = lib.mkIf config.programs.tuigreet.enable {
+    command = "${pkgs.dbus}/bin/dbus-run-session -- ${lib.getExe config.programs.niri.package} --session";
     user = "vye";
   };
 
-  # disable useless services, enable nautilus-related services
+  # enable various services
   services = {
-    gnome.gnome-keyring.enable = false;
-    speechd.enable = false;
-    gnome.sushi.enable = true;
+    # TODO: switch to seatd for a lighter stack
+    # niri
+    elogind.enable = true;
+    dbus.enable = true;
+
+    # nautilus
     gvfs.enable = true;
     udisks2.enable = true;
   };
