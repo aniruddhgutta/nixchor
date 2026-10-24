@@ -1,4 +1,6 @@
 {
+  modules,
+  community,
   config,
   lib,
   pkgs,
@@ -6,28 +8,20 @@
 }:
 
 {
-  networking = {
-    # let iwd manage dhcp
-    dhcpcd.enable = lib.mkDefault false;
+  imports =
+    (with modules; [
+      iwd
+      bluetooth
+      nftables
+    ])
+    ++ (with community; [ tailscale ]);
 
-    # configure iwd
-    wireless.iwd = {
-      enable = true;
-      settings = {
-        General.EnableNetworkConfiguration = true;    # use iwd's built in dhcp client
-        Network.NameResolvingService = "resolvconf";  # use openresolv (default is resolved)
-      };
-    };
-
-    # campus wifi sucks
-    enableIPv6 = false;
-
-    # allow tailnet peers to reach any port on this machine
-    firewall.trustedInterfaces = [ config.services.tailscale.interfaceName ];
-  };
+  # enable iwd
+  services.iwd.enable = true;
+  programs.resolvconf.enable = true;
 
   # configure bluetooth
-  hardware.bluetooth = {
+  services.bluetooth = {
     enable = lib.mkDefault true;
     settings.General = {
       Enable = "Source,Sink,Media,Socket";
@@ -38,15 +32,20 @@
   # configure tailscale
   services.tailscale = {
     enable = true;
-    openFirewall = true;
+    # TODO: check if needed
+    # openFirewall = true;
     authKeyFile = "/etc/tailscale-key";
     extraUpFlags = [ "--ssh" ];
     extraDaemonFlags = [ "--no-logs-no-support" ];
   };
 
-  # configure cloudflare warp
-  services.cloudflare-warp = {
-    enable = lib.mkDefault true;
-    package = pkgs.cloudflare-warp.override { headless = true; };
-  };
+  # allow tailnet peers to reach any port on this machine
+  services.nftables.trustedInterfaces = [ config.services.tailscale.interfaceName ];
+
+  # TODO: port cloudflare-warp
+  # enable cloudflare warp
+  # services.cloudflare-warp = {
+  #   enable = lib.mkDefault true;
+  #   package = pkgs.cloudflare-warp.override { headless = true; };
+  # };
 }
