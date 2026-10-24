@@ -3,11 +3,19 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    finix.url = "github:finix-community/finix";
+    community-modules.url = "github:finix-community/community-modules";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
   };
 
   outputs =
-    { nixpkgs, ... }@inputs:
+    inputs@{
+      self,
+      nixpkgs,
+      finix,
+      community-modules,
+      ...
+    }:
     # remove boilerplate
     let
       mkHost =
@@ -16,13 +24,19 @@
           system ? "x86_64-linux",
           extraModules ? [ ],
         }:
-        nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit inputs; };
+        finix.lib.finixSystem {
+          inherit (nixpkgs) lib;
+
+          specialArgs = {
+            inherit inputs;
+            community = community-modules.nixosModules;
+          };
+
           modules = [
             {
               # configure nixpkgs
-              nixpkgs = {
+              nixpkgs.pkgs = import nixpkgs {
+                inherit system;
                 config.allowUnfree = true;
                 overlays = import ./overlays inputs;
               };

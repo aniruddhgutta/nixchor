@@ -1,5 +1,35 @@
 {
   "nodes": {
+    "community-modules": {
+      "locked": {
+        "lastModified": 1791743568,
+        "narHash": "sha256-6gcFYf4BFHaApP+sB7N4alek0CJ+opNYBDNyl5MFQfE=",
+        "owner": "finix-community",
+        "repo": "community-modules",
+        "rev": "a23be2c6a777fc0be1a0a857f6a5296db1eb054a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "finix-community",
+        "repo": "community-modules",
+        "type": "github"
+      }
+    },
+    "finix": {
+      "locked": {
+        "lastModified": 1792787232,
+        "narHash": "sha256-bnSAeEGdd85dD2+iB/GEBm32s7BGmEfYHk7M/dxse6E=",
+        "owner": "finix-community",
+        "repo": "finix",
+        "rev": "32b3c2d84bd7773ff84b63e1a5ddc5f54524c8bf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "finix-community",
+        "repo": "finix",
+        "type": "github"
+      }
+    },
     "nix-flatpak": {
       "locked": {
         "lastModified": 1790428548,
@@ -34,6 +64,8 @@
     },
     "root": {
       "inputs": {
+        "community-modules": "community-modules",
+        "finix": "finix",
         "nix-flatpak": "nix-flatpak",
         "nixpkgs": "nixpkgs"
       }
