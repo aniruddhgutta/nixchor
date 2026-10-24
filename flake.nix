@@ -46,7 +46,7 @@
           extraModules = [
             ./modules/niri
             ./modules/flatpak.nix
-            ./modules/gaming.nix
+            # ./modules/gaming.nix
           ];
         };
 
