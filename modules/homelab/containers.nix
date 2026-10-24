@@ -1,10 +1,21 @@
 {
-  # enable rootless docker
-  virtualisation.docker.rootless = {
+  modules,
+  ...
+}:
+
+{
+  imports = [ modules.docker ];
+
+  # TODO: switch to rootless-docker when it's ready
+  # enable docker
+  services.docker = {
     enable = true;
-    setSocketVariable = true;
+
+    # TODO: find equivalent in docker wiki
+    # setSocketVariable = true;
   };
 
+  # TODO: check if it exists
   # start docker at boot
-  users.users.vye.linger = true;
+  # users.users.vye.linger = true;
 }

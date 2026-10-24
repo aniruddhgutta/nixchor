@@ -1,4 +1,12 @@
 {
+  modules,
+  pkgs,
+  ...
+}:
+
+{
+  imports = [ modules.openssh ];
+
   # enable openssh
   services.openssh = {
     enable = true;
@@ -12,5 +20,5 @@
   };
 
   # enable terminfo
-  environment.enableAllTerminfo = true;
+  environment.systemPackages = [ pkgs.foot.terminfo ];
 }
