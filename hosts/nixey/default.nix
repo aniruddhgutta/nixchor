@@ -8,6 +8,7 @@
   imports = [
     ./hardware-configuration.nix
     ./intel.nix
+    ./flatpak.nix
     ./packages.nix
   ];
 

@@ -30,6 +30,5 @@
     gnome-calculator
     aerc
     senpai
-    anki
   ];
 }
