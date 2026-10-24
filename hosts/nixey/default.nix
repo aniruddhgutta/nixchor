@@ -10,7 +10,6 @@
     ./hardware-configuration.nix
     ./intel.nix
     ./packages.nix
-    ./packages.nix
 
     # TODO: port nix-flatpak to finit
     # ./flatpak.nix
