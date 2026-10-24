@@ -1,5 +1,7 @@
 {
+  modules,
   lib,
+  pkgs,
   ...
 }:
 
@@ -13,15 +15,38 @@
     ./tlp.nix
     ./security.nix
     ./users.nix
-  ];
+  ]
   # note: overlays are imported in nix.nix
+  ++ (with modules; [
+    bash
+    ash
+    brightnessctl
+    chronyd
+    fcron
+    fwupd
+    getty
+  ]);
 
   # set timezone
   time.timeZone = lib.mkDefault "Asia/Kolkata";
 
-  # disable html and info documentation
-  documentation = {
-    doc.enable = false;
-    info.enable = false;
-  };
+  # TODO: switch to lighter stack after testing
+  # use gnuslop for coreutils
+  programs.coreutils.package = pkgs.coreutils;
+  programs.bash.enable = true;
+
+  # set udev-implementation to eudev
+  services.udev.enable = true;
+
+  # setup brightnessctl
+  programs.brightnessctl.enable = true;
+
+  # enable timesync with chrony
+  services.chrony.enable = true;
+
+  # set cron implementation to fcron
+  services.fcron.enable = true;
+
+  # enable finit's getty
+  services.getty.enable = true;
 }
