@@ -8,7 +8,7 @@
 {
   networking = {
     # let iwd manage dhcp
-    dhcpcd.enable = false;
+    dhcpcd.enable = lib.mkDefault false;
 
     # configure iwd
     wireless.iwd = {
@@ -39,15 +39,9 @@
   services.tailscale = {
     enable = true;
     openFirewall = true;
-    authKeyFile = "/etc/tailscale_key";
+    authKeyFile = "/etc/tailscale-key";
     extraUpFlags = [ "--ssh" ];
     extraDaemonFlags = [ "--no-logs-no-support" ];
-  };
-
-  # make tailscale on-demand
-  systemd.services = {
-    tailscaled.wantedBy = lib.mkForce [ ];
-    tailscaled-autoconnect.wantedBy = lib.mkForce [ ];
   };
 
   # configure cloudflare warp

@@ -10,6 +10,10 @@ the original idea of user friendly, functional and clean dotfiles.
   a nice addon.
 - `petrichor` will still remain installable by (WIP) setup scripts.
 
+## Prerequisites
+- Tailscale auth key: `/etc/tailscale-key`
+- Duckdns token: `/etc/duckdns-token`
+
 ## Secure-boot instructions
 
 - Put firmware in secure boot setup mode and reboot
