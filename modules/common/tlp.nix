@@ -1,8 +1,17 @@
 {
+  modules,
+  ...
+}:
+
+{
+  imports = with modules; [
+    thermald
+    tlp
+  ];
+
   # configure tlp and thermald, disable ppd
   services = {
     thermald.enable = true;
-    power-profiles-daemon.enable = false;
 
     tlp = {
       pd.enable = true;
