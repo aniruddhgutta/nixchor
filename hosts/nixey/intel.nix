@@ -1,21 +1,13 @@
 {
-  lib,
   pkgs,
   ...
 }:
 
 {
-  imports = [ ../../pkgs/intel-lpmd/module.nix ];
-
   # configure intel hardware
   hardware = {
-    enableRedistributableFirmware = true;
-
-    # cpu/npu
-    cpu.intel = {
-      npu.enable = true;
-      updateMicrocode = true;
-    };
+    # enable microcode upates
+    cpu.intel.updateMicrocode = true;
 
     # arc-igpu
     graphics = {
@@ -28,14 +20,6 @@
       ];
     };
   };
-
-  # enable intel-lpmd's overlay
-  nixpkgs.overlays = [
-    (final: prev: {
-      intel-lpmd = final.callPackage ../../pkgs/intel-lpmd/package.nix { };
-    })
-  ];
-  services.lpmd.enable = lib.mkDefault false;
 
   # fix race conditions (fuck intel)
   boot.kernelParams = [

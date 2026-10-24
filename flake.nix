@@ -59,7 +59,7 @@
           hostname = "nixey";
           extraModules = [
             ./modules/niri
-            ./modules/flatpak.nix
+            # ./modules/flatpak.nix
             # ./modules/gaming.nix
           ];
         };

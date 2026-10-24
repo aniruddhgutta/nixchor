@@ -1,5 +1,6 @@
 {
   config,
+  modules,
   lib,
   ...
 }:
@@ -8,17 +9,18 @@
   imports = [
     ./hardware-configuration.nix
     ./intel.nix
-    ./flatpak.nix
     ./packages.nix
+    ./packages.nix
+
+    # TODO: port nix-flatpak to finit
+    # ./flatpak.nix
+
+    # finix modules
+    modules.zzz
   ];
 
-  system.stateVersion = "26.05";
-
-  # make tailscale on-demand
-  systemd.services = {
-    tailscaled.wantedBy = lib.mkForce [ ];
-    tailscaled-autoconnect.wantedBy = lib.mkForce [ ];
-  };
+  # enable zzz for suspend/resume
+  programs.zzz.enable = true;
 
   # add windows entry to limine
   boot.loader.limine.extraEntries = lib.mkIf (config.fileSystems ? "/mnt/windows") ''

@@ -1,13 +1,9 @@
 {
-  modulesPath,
+  pkgs,
   ...
 }:
 
 {
-  imports = [
-    (modulesPath + "/installer/scan/not-detected.nix")
-  ];
-
   boot.initrd.availableKernelModules = [
     "xhci_pci"
     "thunderbolt"
@@ -17,7 +13,14 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
-  boot.supportedFilesystems = [ "ntfs" ];
+  boot.supportedFilesystems.ntfs3.enable = true;
+
+  # for compatibility
+  hardware.firmware = with pkgs; [
+    linux-firmware
+    sof-firmware
+    wireless-regdb
+  ];
 
   fileSystems = {
     "/" = {
@@ -41,6 +44,7 @@
     "/boot" = {
       device = "/dev/disk/by-uuid/E4DB-A40C";
       fsType = "vfat";
+      noCheck = true;
       options = [ "fmask=0022" "dmask=0022" ];
     };
 
