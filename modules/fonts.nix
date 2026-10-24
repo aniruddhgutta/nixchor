@@ -6,10 +6,14 @@
 {
   fonts = {
     packages = with pkgs; [
+      # custom
       iosevka
-      jetbrains-mono
-      cozette
       nerd-fonts.symbols-only
+
+      # defaults
+      dejavu_fonts
+      liberation_ttf
+      noto-fonts-color-emoji
     ];
 
     fontconfig = {
@@ -17,12 +21,11 @@
       allowBitmaps = true;
       defaultFonts.monospace = [
         "Iosevka"
-        "Cozette"
-        "Jetbrains Mono"
         "Symbols Nerd Font"
       ];
     };
 
-    fontDir.enable = true;
+    # TODO: check if needed
+    # fontDir.enable = true;
   };
 }
