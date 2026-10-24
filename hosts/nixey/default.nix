@@ -23,7 +23,7 @@
   programs.zzz.enable = true;
 
   # add windows entry to limine
-  boot.loader.limine.extraEntries = lib.mkIf (config.fileSystems ? "/mnt/windows") ''
+  programs.limine.extraEntries = lib.mkIf (config.fileSystems ? "/mnt/windows") ''
     /Windows 11
       protocol: efi_boot_entry
       entry: Windows Boot Manager
