@@ -40,6 +40,9 @@
         autoGenerateKeys = true;
         autoEnrollKeys.enable = true;
       };
+
+      # enable editor (when secureboot is disabled)
+      enableEditor = !config.boot.loader.limine.secureBoot.enable;
     };
   };
 }
