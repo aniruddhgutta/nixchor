@@ -1,12 +1,9 @@
 {
-  modulesPath,
+  pkgs,
   ...
 }:
 
 {
-  imports = [
-    (modulesPath + "/installer/scan/not-detected.nix")
-  ];
 
   boot.initrd.availableKernelModules = [
     "xhci_pci"
@@ -16,6 +13,13 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
+
+  # for compatibility
+  hardware.firmware = with pkgs; [
+    linux-firmware
+    sof-firmware
+    wireless-regdb
+  ];
 
   fileSystems = {
     "/" = {
@@ -39,6 +43,7 @@
     "/boot" = {
       device = "/dev/disk/by-uuid/1359-2564";
       fsType = "vfat";
+      noCheck = true;
       options = [ "fmask=0022" "dmask=0022" ];
     };
   };
