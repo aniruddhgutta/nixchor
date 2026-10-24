@@ -10,8 +10,9 @@
     consoleLogLevel = 3;
     kernelParams = [ "nvme.noacpi=1" ];
 
-    # enable sysrq
+    # rescue
     kernel.sysctl."kernel.sysrq" = 1;
+    initrd.systemd.emergencyAccess = true;
 
     # enable tmpfs
     tmp.useTmpfs = true;
@@ -31,10 +32,7 @@
     # enable earlyoom
     earlyoom = {
       enable = true;
-      extraArgs = [
-        "-r"
-        "3600"
-      ];
+      extraArgs = [ "-r" "3600" ];
     };
 
   };
