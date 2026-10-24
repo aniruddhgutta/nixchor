@@ -1,38 +1,32 @@
 {
-  pkgs,
+  modules,
   ...
 }:
 
 {
-  security = {
-    # configure doas
-    sudo.enable = false;
-    doas = {
-      enable = true;
-      extraRules = [
-        {
-          users = [ "vye" ];
-          keepEnv = true;
-          persist = true;
-        }
-        {
-          # allow passwordless 'tee' for changing conservation mode (lenovo-only)
-          groups = [ "wheel" ];
-          noPass = true;
-          cmd = "tee";
-          args = [ "/sys/bus/platform/devices/VPC2004:00/conservation_mode" ];
-        }
-      ];
-    };
+  imports = with modules; [
+    doas
+    polkit
+  ];
 
-    # enable polkit
-    polkit.enable = true;
-  };
-
-  # configure gnugpg
-  programs.gnupg.agent = {
+  # configure doas
+  programs.doas = {
     enable = true;
-    enableSSHSupport = true;
-    pinentryPackage = pkgs.pinentry-curses;
+    keepEnv = true;
+    persist = true;
+
+    # TODO: port extra rules / settings
+    # extraRules = [
+    #   {
+    #     # allow passwordless 'tee' for changing conservation mode (lenovo-only)
+    #     groups = [ "wheel" ];
+    #     noPass = true;
+    #     cmd = "tee";
+    #     args = [ "/sys/bus/platform/devices/VPC2004:00/conservation_mode" ];
+    #   }
+    # ];
   };
+
+  # enable polkit
+  services.polkit.enable = true;
 }
