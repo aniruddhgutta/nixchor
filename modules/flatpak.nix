@@ -20,20 +20,11 @@
       "com.collaboraoffice.Office"
       "md.obsidian.Obsidian"
       "com.usebottles.bottles"
-      "org.prismlauncher.PrismLauncher"
-      "org.vinegarhq.Sober"
-      "sh.ppy.osu"
     ];
 
     overrides = {
       # fix un-themed cursor in some Wayland apps
       global.Environment.XCURSOR_PATH = "/run/host/user-share/icons:/run/host/share/icons";
-
-      # allow sober to interact with discord rpc
-      "org.vinegarhq.Sober".Context.filesystems = [
-        "xdg-run/app/com.discordapp.Discord:create"
-        "xdg-run/discord-ipc-0"
-      ];
 
       # allow bottles to make desktop entries
       "com.usebottles.bottles".Context.filesystems = [
