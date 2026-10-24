@@ -1,5 +1,4 @@
 {
-  inputs,
   config,
   lib,
   pkgs,
@@ -7,27 +6,27 @@
 }:
 
 {
-  imports = [ inputs.nix-flatpak.nixosModules.nix-flatpak ];
+  programs = {
+    # enable steam with proton-ge
+    steam = {
+      enable = true;
+      extraCompatPackages = with pkgs; [
+        proton-ge-bin
+      ];
+    };
 
-  # enable steam with proton-ge
-  programs.steam = {
-    enable = true;
-    extraCompatPackages = with pkgs; [
-      proton-ge-bin
-    ];
-  };
+    # enable gamemode
+    gamemode.enable = true;
 
-  # enable gamemode
-  programs.gamemode.enable = true;
-
-  # enable gamescope
-  programs.gamescope = {
-    enable = true;
-    capSysNice = false;
+    # enable gamescope
+    gamescope = {
+      enable = true;
+      capSysNice = false;
+    };
   };
 
   # increase ulimit (fixes bottles' issues)
-  security.pam.loginLimits = [
+  security.pam.loginLimits = lib.mkIf config.services.flatpak.enable [
     {
       domain = "@users";
       item = "memlock";
@@ -39,6 +38,7 @@
   # install prismlauncher, sober and osu (if flatpak is enabled)
   services.flatpak = lib.mkIf config.services.flatpak.enable {
     packages = [
+      "com.vysp3r.ProtonPlus"
       "org.prismlauncher.PrismLauncher"
       "org.vinegarhq.Sober"
       "sh.ppy.osu"
