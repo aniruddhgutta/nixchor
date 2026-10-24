@@ -47,12 +47,7 @@
     "/media/windows" = {
       device = "/dev/disk/by-uuid/029AE0D39AE0C46F";
       fsType = "ntfs3";
-      options = [
-        "rw"
-        "uid=1000"
-        "gid=100"
-        "nofail"
-      ];
+      options = [ "rw" "uid=1000" "gid=100" "nofail" ];
     };
   };
 
