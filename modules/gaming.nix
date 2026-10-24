@@ -1,4 +1,6 @@
 {
+  modules,
+  community,
   config,
   lib,
   pkgs,
@@ -6,6 +8,12 @@
 }:
 
 {
+  imports = with community; [
+    steam
+    gamescope
+  ]
+  ++ (with modules; [ gamemode ]);
+
   programs = {
     # enable steam with proton-ge
     steam = {
@@ -25,31 +33,33 @@
     };
   };
 
-  # increase ulimit (fixes bottles' issues)
-  security.pam.loginLimits = lib.mkIf config.services.flatpak.enable [
-    {
-      domain = "@users";
-      item = "memlock";
-      type = "-";
-      value = "unlimited";
-    }
-  ];
+  # TODO: port loginLimits if needed
+  # # increase ulimit (fixes bottles' issues)
+  # security.pam.loginLimits = lib.mkIf config.services.flatpak.enable [
+  #   {
+  #     domain = "@users";
+  #     item = "memlock";
+  #     type = "-";
+  #     value = "unlimited";
+  #   }
+  # ];
 
-  # install prismlauncher, sober and osu (if flatpak is enabled)
-  services.flatpak = lib.mkIf config.services.flatpak.enable {
-    packages = [
-      "com.vysp3r.ProtonPlus"
-      "org.prismlauncher.PrismLauncher"
-      "org.vinegarhq.Sober"
-      "sh.ppy.osu"
-    ];
+  # TODO: port nix-flatpak
+  # # install prismlauncher, sober and osu (if flatpak is enabled)
+  # services.flatpak = lib.mkIf config.services.flatpak.enable {
+  #   packages = [
+  #     "com.vysp3r.ProtonPlus"
+  #     "org.prismlauncher.PrismLauncher"
+  #     "org.vinegarhq.Sober"
+  #     "sh.ppy.osu"
+  #   ];
 
-    overrides = {
-      # allow sober to interact with discord rpc
-      "org.vinegarhq.Sober".Context.filesystems = [
-        "xdg-run/app/com.discordapp.Discord:create"
-        "xdg-run/discord-ipc-0"
-      ];
-    };
-  };
+  #   overrides = {
+  #     # allow sober to interact with discord rpc
+  #     "org.vinegarhq.Sober".Context.filesystems = [
+  #       "xdg-run/app/com.discordapp.Discord:create"
+  #       "xdg-run/discord-ipc-0"
+  #     ];
+  #   };
+  # };
 }
