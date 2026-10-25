@@ -55,4 +55,7 @@
 
   # enable finit's getty
   services.getty.enable = true;
+
+  # needed for tuigreet to work
+  finit.runlevel = 3;
 }
