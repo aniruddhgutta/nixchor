@@ -1,5 +1,4 @@
 {
-  lib,
   pkgs,
   ...
 }:
@@ -7,57 +6,52 @@
 # mirroring my dinit setup -
 # https://codeberg.org/oceanicc/petrichor/src/branch/main/.config/dinit.d
 
-let
-  mkSvc =
-    {
-      exec,
-      after ? [ ],
-      wants ? after,
-    }:
-    {
-      inherit after;
-      partOf = wants;
-      wantedBy = wants;
-      environment.PATH = lib.mkForce "/run/wrappers/bin:/run/current-system/sw/bin:/run/current-system/sw/sbin";
-      serviceConfig = {
-        ExecStart = exec;
-        Restart = "always";
+{
+  imports = [ ../dinit.nix ];
+
+  dinit = {
+    enable = true;
+    user.services = {
+      awww = {
+        type = "process";
+        command = "${pkgs.awww}/bin/awww-daemon";
+        log-type = "buffer";
+      };
+      awww-backdrop = {
+        type = "process";
+        command = "${pkgs.awww}/bin/awww-daemon --namespace backdrop";
+        log-type = "buffer";
+      };
+      foot = {
+        type = "process";
+        command = "${pkgs.foot}/bin/foot --server";
+      };
+      mpd = {
+        type = "process";
+        command = "${pkgs.mpd}/bin/mpd --no-daemon";
+      };
+      mpdris2-rs = {
+        type = "process";
+        command = "${pkgs.mpdris2-rs}/bin/mpdris2-rs";
+        depends-on = [ "mpd" ];
+        restart = true;
+        smooth-recovery = true;
+      };
+      mpdscribble = {
+        type = "process";
+        command = "${pkgs.mpdscribble}/bin/mpdscribble --no-daemon";
+        after = [ "mpd" ];
+      };
+      swayidle = {
+        type = "process";
+        command = "${pkgs.swayidle}/bin/swayidle";
+        log-type = "buffer";
+      };
+      waybar = {
+        type = "process";
+        command = "${pkgs.waybar}/bin/waybar";
       };
     };
-in
-{
-  systemd.user.services = {
-    awww = mkSvc {
-      exec = "${pkgs.awww}/bin/awww-daemon";
-      wants = [ "graphical-session.target" ];
-    };
-    awww-backdrop = mkSvc {
-      exec = "${pkgs.awww}/bin/awww-daemon --namespace backdrop";
-      wants = [ "graphical-session.target" ];
-    };
-    foot = mkSvc {
-      exec = "${pkgs.foot}/bin/foot --server";
-      wants = [ "graphical-session.target" ];
-    };
-    mpd = mkSvc {
-      exec = "${pkgs.mpd}/bin/mpd --no-daemon";
-      wants = [ "default.target" ];
-    };
-    mpdris2-rs = mkSvc {
-      exec = "${pkgs.mpdris2-rs}/bin/mpdris2-rs";
-      after = [ "mpd.service" ];
-    };
-    mpdscribble = mkSvc {
-      exec = "${pkgs.mpdscribble}/bin/mpdscribble --no-daemon";
-      after = [ "mpd.service" ];
-    };
-    swayidle = mkSvc {
-      exec = "${pkgs.swayidle}/bin/swayidle";
-      after = [ "graphical-session.target" ];
-    };
-    waybar = mkSvc {
-      exec = "${pkgs.waybar}/bin/waybar";
-      after = [ "graphical-session.target" ];
-    };
+
   };
 }

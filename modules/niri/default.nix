@@ -9,13 +9,12 @@
 {
   imports = [
     ./packages.nix
+    ./services.nix
     ./xdg.nix
+
     ../fonts.nix
     ../pipewire.nix
     ../tuigreet.nix
-
-    # TODO: port to finit
-    # ./services.nix
   ]
   ++ (with modules; [
     gvfs
