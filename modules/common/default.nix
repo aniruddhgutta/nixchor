@@ -1,5 +1,6 @@
 {
   modules,
+  config,
   lib,
   pkgs,
   ...
@@ -40,6 +41,11 @@
 
   # setup brightnessctl
   programs.brightnessctl.enable = true;
+  finit.tasks.backlight = {
+    command = "${config.programs.brightnessctl.package}/bin/brightnessctl set 20%";
+    remain-after-exit = true;
+    log = { };
+  };
 
   # enable timesync with chrony
   services.chrony.enable = true;
