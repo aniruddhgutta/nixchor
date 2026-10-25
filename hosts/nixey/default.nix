@@ -27,4 +27,7 @@
       protocol: efi_boot_entry
       entry: Windows Boot Manager
   '';
+
+  # temporarily disable secureboot for testing
+  programs.limine.secureBoot.enable = false;
 }
