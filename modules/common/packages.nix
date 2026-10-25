@@ -17,6 +17,7 @@
     git
     git-lfs
     killall
+    ps_mem
 
     # shell
     yash
