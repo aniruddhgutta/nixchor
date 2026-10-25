@@ -1,5 +1,6 @@
 {
   modules,
+  pkgs,
   ...
 }:
 
@@ -29,4 +30,9 @@
 
   # enable polkit
   services.polkit.enable = true;
+
+  # configure pinentry client for gnupg
+  environment.etc."gnupg/gpg-agent.conf".text = ''
+    pinentry-program ${pkgs.pinentry-curses}/bin/pinentry-curses
+  '';
 }

@@ -11,6 +11,7 @@
     dash
     sbctl
     gnupg
+    pinentry-curses
     git
     git-lfs
     killall
