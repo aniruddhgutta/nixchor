@@ -9,13 +9,12 @@
     mkpasswd
     doas-sudo-shim
     dash
-    sbctl
-    gnupg
-    pinentry-curses
     git
     git-lfs
     killall
     ps_mem
+    curl
+    openssh
 
     # shell
     yash
@@ -45,20 +44,5 @@
     nixd
     nixfmt
     shfmt
-
-    # TODO: remove after testing
-    # nixos defaults
-    gnused
-    gnutar
-    gzip
-    bzip2
-    xz
-    zstd
-    diffutils
-    patch
-    iproute2
-    iputils
-    curl
-    openssh
   ];
 }

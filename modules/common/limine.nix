@@ -2,6 +2,7 @@
   modules,
   config,
   lib,
+  pkgs,
   ...
 }:
 
@@ -44,4 +45,6 @@
       autoEnrollKeys.enable = true;
     };
   };
+
+  environment.systemPackages = lib.mkIf config.programs.limine.secureBoot.enable [ pkgs.sbctl ];
 }
