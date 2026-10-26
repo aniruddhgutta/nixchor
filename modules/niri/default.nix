@@ -50,4 +50,7 @@
     gvfs.enable = true;
     udisks2.enable = true;
   };
+
+  # fix swaylock authentication
+  security.pam.services.swaylock.text = config.security.pam.services.login.text;
 }
