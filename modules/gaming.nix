@@ -33,16 +33,10 @@
     };
   };
 
-  # TODO: port loginLimits if needed
-  # # increase ulimit (fixes bottles' issues)
-  # security.pam.loginLimits = lib.mkIf config.services.flatpak.enable [
-  #   {
-  #     domain = "@users";
-  #     item = "memlock";
-  #     type = "-";
-  #     value = "unlimited";
-  #   }
-  # ];
+  # increase ulimit (fixes bottles' issues)
+  environment.etc."security/limits.conf" = lib.mkIf config.services.flatpak.enable {
+    text = "@users - memlock unlimited\n";
+  };
 
   # TODO: port nix-flatpak
   # # install prismlauncher, sober and osu (if flatpak is enabled)
