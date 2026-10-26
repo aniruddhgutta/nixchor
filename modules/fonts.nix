@@ -25,7 +25,5 @@
       ];
     };
 
-    # TODO: check if needed
-    # fontDir.enable = true;
   };
 }
