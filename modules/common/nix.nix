@@ -33,12 +33,10 @@
 
       # enable cachix
       substituters = [
-        "https://cache.nixos.org"
         "https://finix.cachix.org"
         "https://nix-community.cachix.org"
       ];
       trusted-public-keys = [
-        "hydra.nixos.org-1:CNHJZBh9K4tP3EKF6FkkgeVYsS3ohTl+oS0Qa8bezVs="
         "finix.cachix.org-1:0ejikHDeCp0UErsduUUHcg9IJczY2/h2e5132Z/As/c="
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       ];
