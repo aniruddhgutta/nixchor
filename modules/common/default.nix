@@ -10,6 +10,7 @@
   imports = [
     ./kernel.nix
     ./limine.nix
+    ./man.nix
     ./networking.nix
     ./nix.nix
     ./packages.nix
