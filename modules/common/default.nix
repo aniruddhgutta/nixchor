@@ -19,10 +19,7 @@
   ]
   # note: overlays are imported in nix.nix
   ++ (with modules; [
-    bash
-    ash
     brightnessctl
-    chronyd
     fcron
     fwupd
     getty
@@ -31,10 +28,8 @@
   # set timezone
   time.timeZone = lib.mkDefault "Asia/Kolkata";
 
-  # TODO: switch to lighter stack after testing
-  # use gnuslop for coreutils
-  programs.coreutils.package = pkgs.coreutils;
-  programs.bash.enable = true;
+  # use busybox for coreutils
+  programs.coreutils.package = pkgs.busybox;
 
   # set udev-implementation to eudev
   services.udev.enable = true;
@@ -47,15 +42,9 @@
     log = { };
   };
 
-  # enable timesync with chrony
-  services.chrony.enable = true;
-
   # set cron implementation to fcron
   services.fcron.enable = true;
 
   # enable finit's getty
   services.getty.enable = true;
-
-  # needed for tuigreet to work
-  finit.runlevel = 3;
 }
