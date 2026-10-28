@@ -40,6 +40,7 @@
   };
 
   # allow tailnet peers to reach any port on this machine
+  providers.firewall.backend = "nftables";
   services.nftables.trustedInterfaces = [ config.services.tailscale.interfaceName ];
 
   # TODO: port cloudflare-warp

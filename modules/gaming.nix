@@ -34,9 +34,9 @@
   };
 
   # increase ulimit (fixes bottles' issues)
-  environment.etc."security/limits.conf" = lib.mkIf config.services.flatpak.enable {
-    text = "@users - memlock unlimited\n";
-  };
+  environment.etc."security/limits.conf".text = lib.mkIf config.services.flatpak.enable (
+    lib.mkAfter "@users - memlock unlimited\n"
+  );
 
   # TODO: port nix-flatpak
   # # install prismlauncher, sober and osu (if flatpak is enabled)
