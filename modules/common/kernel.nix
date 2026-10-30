@@ -31,7 +31,13 @@
 
   services = {
     # enable logging
-    sysklogd.enable = true;
+    sysklogd = {
+      enable = true;
+      extraConfig = ''
+        rotate_size  1M
+        rotate_count 5
+      '';
+    };
 
     # enable earlyoom
     earlyoom = {
