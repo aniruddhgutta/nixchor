@@ -22,7 +22,7 @@
 
   # configure bluetooth
   services.bluetooth = {
-    enable = lib.mkDefault true;
+    enable = lib.mkDefault false;
     settings.General = {
       Enable = "Source,Sink,Media,Socket";
       Experimental = true;
@@ -31,7 +31,7 @@
 
   # configure tailscale
   services.tailscale = {
-    enable = true;
+    enable = lib.mkDefault false;
     # TODO: check if needed
     # openFirewall = true;
     authKeyFile = "/etc/tailscale-key";
@@ -46,7 +46,7 @@
   # TODO: port cloudflare-warp
   # enable cloudflare warp
   # services.cloudflare-warp = {
-  #   enable = lib.mkDefault true;
+  #   enable = lib.mkDefault false;
   #   package = pkgs.cloudflare-warp.override { headless = true; };
   # };
 }
