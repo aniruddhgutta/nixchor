@@ -2,15 +2,15 @@
   "nodes": {
     "community-modules": {
       "locked": {
-        "lastModified": 1791743568,
-        "narHash": "sha256-6gcFYf4BFHaApP+sB7N4alek0CJ+opNYBDNyl5MFQfE=",
-        "owner": "finix-community",
+        "lastModified": 1793249505,
+        "narHash": "sha256-zY4UxrOD7cCMI/J9KcukLQytzCxmQZ5l6vU/gaVsMLw=",
+        "owner": "aniruddhgutta",
         "repo": "community-modules",
-        "rev": "a23be2c6a777fc0be1a0a857f6a5296db1eb054a",
+        "rev": "1da153ae452d1b0154959a41383ace1f6b524462",
         "type": "github"
       },
       "original": {
-        "owner": "finix-community",
+        "owner": "aniruddhgutta",
         "repo": "community-modules",
         "type": "github"
       }

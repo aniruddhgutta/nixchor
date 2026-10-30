@@ -14,7 +14,10 @@
       bluetooth
       nftables
     ])
-    ++ (with community; [ tailscale ]);
+    ++ (with community; [
+      cloudflare-warp
+      tailscale
+    ]);
 
   # enable iwd
   services.iwd.enable = true;
@@ -43,10 +46,9 @@
   providers.firewall.backend = "nftables";
   services.nftables.trustedInterfaces = [ config.services.tailscale.interfaceName ];
 
-  # TODO: port cloudflare-warp
   # enable cloudflare warp
-  # services.cloudflare-warp = {
-  #   enable = lib.mkDefault false;
-  #   package = pkgs.cloudflare-warp.override { headless = true; };
-  # };
+  services.cloudflare-warp = {
+    enable = lib.mkDefault false;
+    package = pkgs.cloudflare-warp.override { headless = true; };
+  };
 }

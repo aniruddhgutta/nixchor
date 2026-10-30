@@ -34,4 +34,7 @@
   # change conservation mode passwordless
   environment.etc."doas.conf".text =
     "permit nopass :wheel cmd tee args /sys/bus/platform/devices/VPC2004:00/conservation_mode\n";
+
+  # TODO: fix cloudflare-warp module
+  services.cloudflare-warp.enable = true;
 }
