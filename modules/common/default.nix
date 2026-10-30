@@ -1,6 +1,5 @@
 {
   modules,
-  config,
   lib,
   pkgs,
   ...
@@ -8,6 +7,7 @@
 
 {
   imports = [
+    ./backlight.nix
     ./kernel.nix
     ./limine.nix
     ./man.nix
@@ -20,7 +20,6 @@
   ]
   # note: overlays are imported in nix.nix
   ++ (with modules; [
-    brightnessctl
     fcron
     fwupd
     getty
@@ -34,15 +33,6 @@
 
   # set udev-implementation to eudev
   services.udev.enable = true;
-
-  # setup brightnessctl
-  programs.brightnessctl.enable = true;
-  finit.tasks.backlight = {
-    description = "set default brightness";
-    command = "${config.programs.brightnessctl.package}/bin/brightnessctl set 20%";
-    remain-after-exit = true;
-    log = { };
-  };
 
   # set cron implementation to fcron
   services.fcron.enable = true;
