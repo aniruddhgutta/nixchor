@@ -32,7 +32,6 @@
     xwayland-satellite.enable = true;
   };
 
-  # TODO: there must be a better way to do this
   # autolaunch niri if greetd is enabled
   services.greetd.settings.initial_session = lib.mkIf config.programs.tuigreet.enable {
     command = "${pkgs.dbus}/bin/dbus-run-session -- ${lib.getExe config.programs.niri.package} --session";
@@ -50,6 +49,12 @@
     gvfs.enable = true;
     udisks2.enable = true;
   };
+
+  # fix udisks2.conf not existing
+  services.udisks2.settings.udisks2.modules = lib.mkForce "*";
+  environment.etc."udisks2/udisks2.conf".source =
+    (pkgs.formats.ini { }).generate "udisks2.conf"
+      config.services.udisks2.settings;
 
   # fix swaylock authentication
   security.pam.services.swaylock.text = config.security.pam.services.login.text;
