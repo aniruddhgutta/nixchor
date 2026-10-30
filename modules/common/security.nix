@@ -1,5 +1,6 @@
 {
   modules,
+  lib,
   pkgs,
   ...
 }:
@@ -15,17 +16,6 @@
     enable = true;
     keepEnv = true;
     persist = true;
-
-    # TODO: port extra rules / settings
-    # extraRules = [
-    #   {
-    #     # allow passwordless 'tee' for changing conservation mode (lenovo-only)
-    #     groups = [ "wheel" ];
-    #     noPass = true;
-    #     cmd = "tee";
-    #     args = [ "/sys/bus/platform/devices/VPC2004:00/conservation_mode" ];
-    #   }
-    # ];
   };
 
   # enable polkit
@@ -39,8 +29,6 @@
     ];
 
     # use pinentry-curses
-    etc."gnupg/gpg-agent.conf".text = ''
-      pinentry-program ${pkgs.pinentry-curses}/bin/pinentry-curses
-    '';
+    etc."gnupg/gpg-agent.conf".text = "pinentry-program ${lib.getExe pkgs.pinentry-curses}\n";
   };
 }

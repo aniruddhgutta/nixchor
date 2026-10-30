@@ -30,4 +30,8 @@
 
   # temporarily disable secureboot for testing
   programs.limine.secureBoot.enable = false;
+
+  # change conservation mode passwordless
+  environment.etc."doas.conf".text =
+    "permit nopass :wheel cmd tee args /sys/bus/platform/devices/VPC2004:00/conservation_mode\n";
 }
