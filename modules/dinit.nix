@@ -11,7 +11,10 @@
   options.dinit.enable = lib.mkEnableOption "dinit user services";
 
   config = lib.mkIf config.dinit.enable {
-    environment.systemPackages = [ pkgs.dinit ];
+    environment.systemPackages = [
+      (lib.hiPrio pkgs.finit)
+      pkgs.dinit
+    ];
 
     dinit.user.services.boot = {
       type = "internal";
