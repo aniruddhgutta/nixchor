@@ -29,18 +29,20 @@
       mpd = {
         type = "process";
         command = "${pkgs.mpd}/bin/mpd --no-daemon";
+        restart = true;
+        smooth-recovery = true;
       };
       mpdris2-rs = {
         type = "process";
         command = "${pkgs.mpdris2-rs}/bin/mpdris2-rs";
         depends-on = [ "mpd" ];
         restart = true;
-        smooth-recovery = true;
       };
       mpdscribble = {
         type = "process";
         command = "${pkgs.mpdscribble}/bin/mpdscribble --no-daemon";
-        after = [ "mpd" ];
+        depends-on = [ "mpd" ];
+        restart = true;
       };
       swayidle = {
         type = "process";
