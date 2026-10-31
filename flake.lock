@@ -2,11 +2,11 @@
   "nodes": {
     "community-modules": {
       "locked": {
-        "lastModified": 1793249505,
-        "narHash": "sha256-zY4UxrOD7cCMI/J9KcukLQytzCxmQZ5l6vU/gaVsMLw=",
+        "lastModified": 1793439159,
+        "narHash": "sha256-jkOGz09og0kyOWHpMF0246RAwHkl64f4jwb7rUkav5g=",
         "owner": "aniruddhgutta",
         "repo": "community-modules",
-        "rev": "1da153ae452d1b0154959a41383ace1f6b524462",
+        "rev": "dfd2c9e7d63532fb50d64c87c6a7e7253fefa813",
         "type": "github"
       },
       "original": {
