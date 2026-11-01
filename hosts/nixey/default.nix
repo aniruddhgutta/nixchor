@@ -24,6 +24,13 @@
   # enable cloudflare-warp
   services.cloudflare-warp.enable = true;
 
+  # enable tailscale
+  services.tailscale.enable = true;
+  finit = {
+    services.tailscaled.manual-start = lib.mkIf config.services.tailscale.enable true;
+    tasks.tailscale-up.manual-start = lib.mkIf config.services.tailscale.enable true;
+  };
+
   # change conservation mode passwordless
   environment.etc."doas.conf".text =
     "permit nopass :wheel cmd tee args /sys/bus/platform/devices/VPC2004:00/conservation_mode\n";

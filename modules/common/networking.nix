@@ -35,8 +35,6 @@
   # configure tailscale
   services.tailscale = {
     enable = lib.mkDefault false;
-    # TODO: check if needed
-    # openFirewall = true;
     authKeyFile = "/etc/tailscale-key";
     extraUpFlags = [ "--ssh" ];
     extraDaemonFlags = [ "--no-logs-no-support" ];
