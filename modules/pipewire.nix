@@ -22,6 +22,8 @@ in
   # configure pipewire
   programs.pipewire = {
     enable = true;
+    alsa.enable = true;
+    jack.enable = true;
 
     # allow pipewire to use lsp-plugins for para-eqs
     extraLv2Packages = [
