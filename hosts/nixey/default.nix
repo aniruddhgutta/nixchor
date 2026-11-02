@@ -36,7 +36,7 @@
     "permit nopass :wheel cmd tee args /sys/bus/platform/devices/VPC2004:00/conservation_mode\n";
 
   # add windows entry to limine
-  programs.limine.extraEntries = lib.mkIf (config.fileSystems ? "/mnt/windows") ''
+  programs.limine.extraEntries = lib.mkIf (config.fileSystems ? "/media/windows") ''
     /Windows 11
       protocol: efi_boot_entry
       entry: Windows Boot Manager
