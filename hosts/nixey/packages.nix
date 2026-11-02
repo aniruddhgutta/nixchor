@@ -13,6 +13,10 @@
     clang
     clang-tools
 
+    # text editors
+    kakoune
+    neovim
+
     # creative
     gimp
     ffmpeg-headless
