@@ -20,7 +20,14 @@
     ]);
 
   # enable iwd
-  services.iwd.enable = true;
+  services.iwd = {
+    enable = true;
+    settings.General = {
+      # randomise mac-id
+      AddressRandomization = "network";
+      AddressRandomizationRange = "full";
+    };
+  };
   programs.resolvconf.enable = true;
 
   # configure bluetooth
