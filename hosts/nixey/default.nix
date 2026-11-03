@@ -23,6 +23,7 @@
 
   # enable cloudflare-warp
   services.cloudflare-warp.enable = true;
+  services.bluetooth.enable = true;
 
   # enable tailscale
   services.tailscale.enable = true;
