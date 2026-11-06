@@ -21,6 +21,11 @@
     };
   };
 
+  # use proper speaker layout
+  programs.modprobe.extraConfig = ''
+    options snd-sof-intel-hda-generic hda_model=alc287-yoga9-bass-spk-pin
+  '';
+
   # fix race conditions (fuck intel)
   boot.kernelParams = [
     "intel_idle.max_cstate=1" # workaround for ideapad pro 5 black screening
