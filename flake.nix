@@ -4,8 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     finix.url = "github:finix-community/finix";
-    community-modules.url = "github:aniruddhgutta/community-modules";
-    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
+    community-modules.url = "github:aniruddhgutta/community-modules/flatpak";
   };
 
   outputs =
@@ -59,7 +58,7 @@
           hostname = "nixey";
           extraModules = [
             ./modules/niri
-            # ./modules/flatpak.nix
+            ./modules/flatpak.nix
             # ./modules/gaming.nix
           ];
         };

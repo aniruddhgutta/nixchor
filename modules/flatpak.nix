@@ -1,10 +1,10 @@
 {
-  inputs,
+  community,
   ...
 }:
 
 {
-  imports = [ inputs.nix-flatpak.nixosModules.nix-flatpak ];
+  imports = [ community.flatpak ];
 
   services.flatpak = {
     enable = true;
@@ -15,7 +15,6 @@
       "io.github.nozwock.Packet"
       "com.discordapp.Discord"
       "sh.cider.Cider"
-      "com.spotify.Client"
       "io.github.alainm23.planify"
       "com.collaboraoffice.Office"
       "md.obsidian.Obsidian"

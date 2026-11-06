@@ -2,47 +2,32 @@
   "nodes": {
     "community-modules": {
       "locked": {
-        "lastModified": 1793439159,
-        "narHash": "sha256-jkOGz09og0kyOWHpMF0246RAwHkl64f4jwb7rUkav5g=",
+        "lastModified": 1793952708,
+        "narHash": "sha256-x9HMpXZT/fylLkMyWBIrXOup9pWMoEWG+Un7OO7cW8A=",
         "owner": "aniruddhgutta",
         "repo": "community-modules",
-        "rev": "dfd2c9e7d63532fb50d64c87c6a7e7253fefa813",
+        "rev": "be0342e3e5f4a656dff3a273a7ce7daabb96d497",
         "type": "github"
       },
       "original": {
         "owner": "aniruddhgutta",
+        "ref": "flatpak",
         "repo": "community-modules",
         "type": "github"
       }
     },
     "finix": {
       "locked": {
-        "lastModified": 1793762804,
-        "narHash": "sha256-W7oI0Fmj3X/WAKDi86BvSKZFymBmbLmQfPHj7VqBmPY=",
+        "lastModified": 1793840127,
+        "narHash": "sha256-jmdk6RmwIPtsnzr/33iXQU7z1iqtb8E0j3aAIFqQbvM=",
         "owner": "finix-community",
         "repo": "finix",
-        "rev": "2810b9e1e13fc2aaa627ebb86fe799a6ae9803db",
+        "rev": "34f8558b268afcdf43b851f3a5b06a92f225d650",
         "type": "github"
       },
       "original": {
         "owner": "finix-community",
         "repo": "finix",
-        "type": "github"
-      }
-    },
-    "nix-flatpak": {
-      "locked": {
-        "lastModified": 1790428548,
-        "narHash": "sha256-OsZ/I7v3ArCrk0XOUvkiU1dFtGtE1qZTHRGjvBXIKUU=",
-        "owner": "gmodena",
-        "repo": "nix-flatpak",
-        "rev": "f1f045fc8b35ff59f88982c1752d3f3a42ca6a61",
-        "type": "github"
-      },
-      "original": {
-        "owner": "gmodena",
-        "ref": "latest",
-        "repo": "nix-flatpak",
         "type": "github"
       }
     },
@@ -66,7 +51,6 @@
       "inputs": {
         "community-modules": "community-modules",
         "finix": "finix",
-        "nix-flatpak": "nix-flatpak",
         "nixpkgs": "nixpkgs"
       }
     }

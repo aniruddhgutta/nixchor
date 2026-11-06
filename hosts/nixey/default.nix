@@ -11,9 +11,6 @@
     ./intel.nix
     ./packages.nix
 
-    # TODO: port nix-flatpak to finit
-    # ./flatpak.nix
-
     # finix modules
     modules.zzz
   ];

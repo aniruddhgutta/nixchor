@@ -38,22 +38,21 @@
     lib.mkAfter "@users - memlock unlimited\n"
   );
 
-  # TODO: port nix-flatpak
-  # # install prismlauncher, sober and osu (if flatpak is enabled)
-  # services.flatpak = lib.mkIf config.services.flatpak.enable {
-  #   packages = [
-  #     "com.vysp3r.ProtonPlus"
-  #     "org.prismlauncher.PrismLauncher"
-  #     "org.vinegarhq.Sober"
-  #     "sh.ppy.osu"
-  #   ];
+  # install prismlauncher, sober and osu (if flatpak is enabled)
+  services.flatpak = lib.mkIf config.services.flatpak.enable {
+    packages = [
+      "com.vysp3r.ProtonPlus"
+      "org.prismlauncher.PrismLauncher"
+      "org.vinegarhq.Sober"
+      "sh.ppy.osu"
+    ];
 
-  #   overrides = {
-  #     # allow sober to interact with discord rpc
-  #     "org.vinegarhq.Sober".Context.filesystems = [
-  #       "xdg-run/app/com.discordapp.Discord:create"
-  #       "xdg-run/discord-ipc-0"
-  #     ];
-  #   };
-  # };
+    overrides = {
+      # allow sober to interact with discord rpc
+      "org.vinegarhq.Sober".Context.filesystems = [
+        "xdg-run/app/com.discordapp.Discord:create"
+        "xdg-run/discord-ipc-0"
+      ];
+    };
+  };
 }
