@@ -18,26 +18,26 @@
     },
     "finix": {
       "locked": {
-        "lastModified": 1793840127,
-        "narHash": "sha256-jmdk6RmwIPtsnzr/33iXQU7z1iqtb8E0j3aAIFqQbvM=",
-        "owner": "finix-community",
+        "lastModified": 1793959879,
+        "narHash": "sha256-2XrV93UBYF0UbjQlK+iokZOwcZHg7bkCzj43d3PZUzE=",
+        "owner": "aniruddhgutta",
         "repo": "finix",
-        "rev": "34f8558b268afcdf43b851f3a5b06a92f225d650",
+        "rev": "ea03ccd8f5cbe2bcd8bcafd414b4ac3b733c1f69",
         "type": "github"
       },
       "original": {
-        "owner": "finix-community",
+        "owner": "aniruddhgutta",
         "repo": "finix",
         "type": "github"
       }
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1793540411,
-        "narHash": "sha256-fiPJ88izTVucjeo2EQ3jk4aWmLg03I1D4vxnX2QjEgE=",
+        "lastModified": 1793726008,
+        "narHash": "sha256-jQp1wKvbwWdLBASTXkSi/VYmDJ5AbBi1WvcMt9HWJC8=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "0bb2eedc20e4739f29e8045034f2828ad7054f8f",
+        "rev": "1d060086d60cb76a40cf37109f979d88a5bd6396",
         "type": "github"
       },
       "original": {

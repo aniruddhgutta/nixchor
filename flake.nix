@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    finix.url = "github:finix-community/finix";
+    finix.url = "github:aniruddhgutta/finix";
     community-modules.url = "github:aniruddhgutta/community-modules/flatpak";
   };
 
