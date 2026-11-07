@@ -29,6 +29,11 @@
     };
   };
 
+  # use proper speaker layout
+  boot.extraModprobeConfig = ''
+    options snd-sof-intel-hda-generic hda_model=alc287-yoga9-bass-spk-pin
+  '';
+
   # enable intel-lpmd's overlay
   nixpkgs.overlays = [
     (final: prev: {
