@@ -24,7 +24,7 @@
     davinci-resolve
 
     # misc apps
-    brave-origin
+    helium
     gnome-calculator
     aerc
     senpai

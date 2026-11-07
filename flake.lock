@@ -18,16 +18,36 @@
     },
     "finix": {
       "locked": {
-        "lastModified": 1793959879,
-        "narHash": "sha256-2XrV93UBYF0UbjQlK+iokZOwcZHg7bkCzj43d3PZUzE=",
+        "lastModified": 1794024150,
+        "narHash": "sha256-Ve+7iKf/ZJTA83Q9s3ax//7VWIKuC+prwrQXUW2dmvk=",
         "owner": "aniruddhgutta",
         "repo": "finix",
-        "rev": "ea03ccd8f5cbe2bcd8bcafd414b4ac3b733c1f69",
+        "rev": "95707dc4f85f67a10bbd98e7d0db7229cca4d88c",
         "type": "github"
       },
       "original": {
         "owner": "aniruddhgutta",
         "repo": "finix",
+        "type": "github"
+      }
+    },
+    "helium": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1794041283,
+        "narHash": "sha256-zj2ct7aOSj/SyraVN/Wzshhej56XrHe+NrIr8VKlgDo=",
+        "owner": "aniruddhgutta",
+        "repo": "helium-nix",
+        "rev": "0b3333ca1294bc6397820910eb517464c945b6da",
+        "type": "github"
+      },
+      "original": {
+        "owner": "aniruddhgutta",
+        "repo": "helium-nix",
         "type": "github"
       }
     },
@@ -51,6 +71,7 @@
       "inputs": {
         "community-modules": "community-modules",
         "finix": "finix",
+        "helium": "helium",
         "nixpkgs": "nixpkgs"
       }
     }

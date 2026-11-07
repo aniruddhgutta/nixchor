@@ -2,9 +2,18 @@
   description = "oceanicc's petrichor but nix-ified";
 
   inputs = {
+    # nixpkgs (unstable)
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    # finix-related inputs
     finix.url = "github:aniruddhgutta/finix";
     community-modules.url = "github:aniruddhgutta/community-modules/flatpak";
+
+    # flake for helium (uses upstream's .deb releases)
+    helium = {
+      url = "github:aniruddhgutta/helium-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
