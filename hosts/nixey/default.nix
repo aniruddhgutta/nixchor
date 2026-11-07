@@ -18,14 +18,19 @@
   # enable zzz for suspend/resume
   programs.zzz.enable = true;
 
+  # enable bluetooth
+  services.bluetooth.enable = true;
+
   # enable cloudflare-warp
   services.cloudflare-warp.enable = true;
-  services.bluetooth.enable = true;
 
   # enable tailscale
   services.tailscale.enable = true;
+
+  # disable services from starting on boot
   finit = {
     services.tailscaled.manual-start = lib.mkIf config.services.tailscale.enable true;
+    services.bluetooth.manual-start = lib.mkIf config.services.bluetooth.enable true;
     tasks.tailscale-up.manual-start = lib.mkIf config.services.tailscale.enable true;
   };
 
@@ -39,7 +44,4 @@
       protocol: efi_boot_entry
       entry: Windows Boot Manager
   '';
-
-  # temporarily disable secureboot for testing
-  programs.limine.secureBoot.enable = false;
 }
