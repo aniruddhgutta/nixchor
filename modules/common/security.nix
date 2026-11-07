@@ -22,6 +22,12 @@
           cmd = "tee";
           args = [ "/sys/bus/platform/devices/VPC2004:00/conservation_mode" ];
         }
+        {
+          # allow passwordless 'tlp' for changing performance modes
+          groups = [ "wheel" ];
+          noPass = true;
+          cmd = "tlp";
+        }
       ];
     };
 

@@ -1,11 +1,9 @@
 {
   # configure tlp and thermald, disable ppd
   services = {
-    thermald.enable = true;
     power-profiles-daemon.enable = false;
 
     tlp = {
-      pd.enable = true;
       enable = true;
       settings = {
         MEM_SLEEP_ON_BAT = "deep";
