@@ -21,7 +21,6 @@ the original idea of user friendly, functional and clean dotfiles.
 
 | nixchor   | utils                                                   |
 | --------- | ------------------------------------------------------- |
-| distro    | finix                                                   |
 | init      | finit / dinit (user services)                           |
 | boot      | limine (opt: secure-boot)                               |
 | coreutils | busybox                                                 |
@@ -79,6 +78,7 @@ Some experiments I haven't gotten to yet:
 - [ ] configure [sops](https://github.com/mic92/sops-nix) for secrets management.
 - [ ] custom kernel
 - [ ] flesh out `mdevd + seatd` stack for `nixey`
+- [ ] switch from `elogind` to `sessiond + zzz`
 - [ ] try out `keventd` and `gardendevd`
 - [ ] explore overlays made by the [finix community](https://discord.gg/nVe5Zkaypg)
 - [ ] package `chimerautils` to replace `busybox`
