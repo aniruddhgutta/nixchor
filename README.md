@@ -17,6 +17,8 @@ the original idea of user friendly, functional and clean dotfiles.
 > looking for a vanilla `nixos` configuration? check out [nixos](../nixos),
 > but please don't use it, it's not maintained anymore.
 
+---
+
 ## Info
 
 | nixchor   | utils                                                   |
@@ -37,11 +39,15 @@ the original idea of user friendly, functional and clean dotfiles.
 > `eudev` --> `elogind` (or) `mdev` --> `seatd`.
 > In order to switch stacks, simply switch your device manager.
 
+---
+
 ## Prerequisites
 
 For `misato` (my homelabs):
 - Tailscale auth key: `/etc/tailscale-key`
 - Duckdns token: `/etc/duckdns-token`
+
+---
 
 ## Installation
 
@@ -50,6 +56,8 @@ to bootstrap it from a `nixos` image. However it's a fairly straightforward
 method to install finix (with a flake-based setup such as mine) by following
 the instructions given on their docs -
 [installation](https://finix-community.github.io/finix/installation.html).
+
+---
 
 ## Secure-boot instructions
 
@@ -67,6 +75,8 @@ the instructions given on their docs -
 - Reboot into firmware and enable secure boot (separate toggle from Setup Mode)
 - After booting into your system, verify secure boot status with `doas sbctl
   status | grep 'Secure Boot'`
+
+---
 
 ## TODO
 
