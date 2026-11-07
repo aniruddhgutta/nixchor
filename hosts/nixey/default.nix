@@ -10,13 +10,7 @@
     ./hardware-configuration.nix
     ./intel.nix
     ./packages.nix
-
-    # finix modules
-    modules.zzz
   ];
-
-  # enable zzz for suspend/resume
-  programs.zzz.enable = true;
 
   # enable bluetooth
   services.bluetooth.enable = true;
