@@ -2,6 +2,10 @@
 
 to be deterministic or imperative, that is the question.
 
+> [!IMPORTANT]
+> This configuration is archived and will not be maintained anymore.
+> Please refer to my [finix configuration](../main) for further updates.
+
 **nixchor** is a nix-managed fork of
 [petrichor](https://codeberg.org/oceanicc/petrichor) which (hopefully) sticks to
 the original idea of user friendly, functional and clean dotfiles.
