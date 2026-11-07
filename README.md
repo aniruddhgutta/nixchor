@@ -16,11 +16,18 @@ the original idea of user friendly, functional and clean dotfiles.
 
 ## Secure-boot instructions
 
-- Put firmware in secure boot setup mode and reboot
-- Rebuild configuration with `nixos-rebuild boot --sudo --flake .` (Important:
-  `boot`, not `switch`)
+- Reboot into firmware and clear the Secure Boot keys ("Reset to Setup Mode" /
+  "Clear all keys", not "restore factory defaults"), then boot back into NixOS
+- Confirm `doas sbctl status | grep 'Setup Mode'` says `Enabled`
+- Rebuild with `nixos-rebuild boot --sudo --flake .` (Important: `boot`, not
+  `switch`). Limine's install hook generates the keys, enrolls them
+  (`autoEnrollKeys`) and signs `BOOTX64.EFI` in this single run, so Setup Mode
+  must already be active. This only happens when no keys exist yet: if an
+  earlier attempt left `/var/lib/sbctl` behind, `doas rm -rf /var/lib/sbctl`
+  first
+- Before rebooting, ensure `doas sbctl status` shows `Setup Mode: Disabled`
+  (PK enrolled) and `doas sbctl verify` lists Limine's `BOOTX64.EFI` as signed
 - Reboot into firmware and enable secure boot
-- Systemd-boot should throw a `Enabling secure boot` message
 - After booting into your system, verify secure boot status with `doas sbctl
   status | grep 'Secure Boot'`
 
