@@ -14,8 +14,17 @@
     wireless.iwd = {
       enable = true;
       settings = {
-        General.EnableNetworkConfiguration = true;    # use iwd's built in dhcp client
-        Network.NameResolvingService = "resolvconf";  # use openresolv (default is resolved)
+        General = {
+          # use iwd's built in dhcp client (if dhcpcd is disabled)
+          EnableNetworkConfiguration = !config.dhcpcd.enable;
+
+          # randomise mac-id
+          AddressRandomization = "network";
+          AddressRandomizationRange = "full";
+        };
+
+        # use openresolv (default is resolved)
+        Network.NameResolvingService = "resolvconf";
       };
     };
 
@@ -28,7 +37,7 @@
 
   # configure bluetooth
   hardware.bluetooth = {
-    enable = lib.mkDefault true;
+    enable = lib.mkDefault false;
     settings.General = {
       Enable = "Source,Sink,Media,Socket";
       Experimental = true;
@@ -37,7 +46,7 @@
 
   # configure tailscale
   services.tailscale = {
-    enable = true;
+    enable = lib.mkDefault false;
     openFirewall = true;
     authKeyFile = "/etc/tailscale-key";
     extraUpFlags = [ "--ssh" ];
@@ -46,7 +55,7 @@
 
   # configure cloudflare warp
   services.cloudflare-warp = {
-    enable = lib.mkDefault true;
+    enable = lib.mkDefault false;
     package = pkgs.cloudflare-warp.override { headless = true; };
   };
 }

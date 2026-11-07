@@ -14,7 +14,11 @@
 
   system.stateVersion = "26.05";
 
+  # enable cloudflare-warp
+  services.cloudflare-warp.enable = true;
+
   # make tailscale on-demand
+  services.tailscale.enable = true;
   systemd.services = {
     tailscaled.wantedBy = lib.mkForce [ ];
     tailscaled-autoconnect.wantedBy = lib.mkForce [ ];
