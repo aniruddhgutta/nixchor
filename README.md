@@ -83,12 +83,14 @@ the instructions given on their docs -
 Some experiments I haven't gotten to yet:
 
 - [ ] try [generic-services](https://github.com/parzivale/finix/tree/generic-services)
-      with `dinit` or `sinit`.
-- [ ] try [hjem](https://hjem.feel-co.org) for pure-nix dotfiles.
-- [ ] configure [sops](https://github.com/mic92/sops-nix) for secrets management.
+      with `dinit` or `sinit`
+- [ ] try [hjem](https://hjem.feel-co.org) for pure-nix dotfiles
+- [ ] configure [sops](https://github.com/mic92/sops-nix) for secrets management
 - [ ] custom kernel
 - [ ] flesh out `mdevd + seatd` stack for `nixey`
 - [ ] switch from `elogind` to `sessiond + zzz`
 - [ ] try out `keventd` and `gardendevd`
 - [ ] explore overlays made by the [finix community](https://discord.gg/nVe5Zkaypg)
 - [ ] package `chimerautils` to replace `busybox`
+- [ ] restructure repo to allow for drop-in config switches
+- [ ] add a river config aiming to be super minimal
