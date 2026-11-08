@@ -33,4 +33,7 @@
     "i915.force_probe=!7d51"  # force xe driver
     "xe.force_probe=7d51"
   ];
+  
+  # trying to fix freezes
+  # programs.modprobe.blacklist = [ "iwlwifi" "iwlmld" "iwlmvm" ];
 }
