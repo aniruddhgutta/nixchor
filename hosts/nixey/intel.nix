@@ -26,14 +26,28 @@
     options snd-sof-intel-hda-generic hda_model=alc287-yoga9-bass-spk-pin
   '';
 
-  # fix race conditions (fuck intel)
-  boot.kernelParams = [
-    "intel_idle.max_cstate=1" # workaround for ideapad pro 5 black screening
-    "pcie_port_pm=off"        # workaround for intel be200 not waking up from sleep
-    "i915.force_probe=!7d51"  # force xe driver
-    "xe.force_probe=7d51"
-  ];
-  
-  # trying to fix freezes
-  # programs.modprobe.blacklist = [ "iwlwifi" "iwlmld" "iwlmvm" ];
+  boot = {
+    # use 6.12-lts kernel to fix freezes
+    # ref: https://gist.github.com/Blizzke/9bfc3efd835dd607df39cee9cdd7205c
+    kernelPackages = pkgs.linuxPackages_6_12;
+
+    # various fixes
+    kernelParams = [
+      # workaround for ideapad pro 5 black screening
+      # alt: use kernels <= 6.12-lts
+      # "intel_idle.max_cstate=1"
+
+      # workaround for intel be200 not waking up from sleep
+      # alt: elogind hook to unload and reload iwlwifi module
+      "pcie_port_pm=off"
+
+      # force xe driver, since it's better suited for intel-arc gpus
+      "i915.force_probe=!7d51"
+      "xe.force_probe=7d51"
+    ];
+  };
+
+  # (for testing various freeze-related solutions)
+  # programs.modprobe.blacklist = [ "iwlwifi" ];
+  # environment.systemPackages = [ pkgs.pciutils ];
 }
