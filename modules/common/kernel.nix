@@ -1,5 +1,6 @@
 {
   modules,
+  lib,
   pkgs,
   ...
 }:
@@ -13,7 +14,7 @@
 
   # kernel
   boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
     kernelParams = [
       "loglevel=3"
       "nvme.noacpi=1"
@@ -26,7 +27,7 @@
 
     # rescue
     kernel.sysctl."kernel.sysrq" = 1;
-    initrd.emergencyAccess = true;
+    initrd.emergencyAccess = lib.mkDefault true;
   };
 
   services = {
@@ -46,6 +47,6 @@
     };
 
     # enable zram
-    zram-swap.enable = true;
+    zram-swap.enable = lib.mkDefault true;
   };
 }
