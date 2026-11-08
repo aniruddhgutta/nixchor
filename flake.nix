@@ -6,7 +6,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # finix-related inputs
-    finix.url = "github:aniruddhgutta/finix";
+    finix.url = "github:finix-community/finix";
     community-modules.url = "github:aniruddhgutta/community-modules/flatpak";
 
     # flake for helium (uses upstream's .deb releases)
