@@ -40,7 +40,8 @@
     impala
 
     # text editor
-    helix
+    steelix
+    steel
     nixd
     nixfmt
     shfmt
