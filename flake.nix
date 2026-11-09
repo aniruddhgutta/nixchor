@@ -7,7 +7,7 @@
 
     # finix-related inputs
     finix.url = "github:finix-community/finix";
-    community-modules.url = "github:aniruddhgutta/community-modules/flatpak";
+    community-modules.url = "github:aniruddhgutta/community-modules/intel-lpmd";
 
     # flake for helium (uses upstream's .deb releases)
     helium = {

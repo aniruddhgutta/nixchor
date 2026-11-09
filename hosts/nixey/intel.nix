@@ -1,9 +1,12 @@
 {
+  community,
   pkgs,
   ...
 }:
 
 {
+  imports = [ community.intel-lpmd ];
+
   # configure intel hardware
   hardware = {
     # enable microcode upates
@@ -20,6 +23,9 @@
       ];
     };
   };
+
+  # enable intel-lpmd
+  services.intel-lpmd.enable = true;
 
   # use proper speaker layout
   programs.modprobe.extraConfig = ''

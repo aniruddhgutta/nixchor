@@ -1,5 +1,21 @@
+From 3ccea2d41586f51977f2651d0e12d132be2062a6 Mon Sep 17 00:00:00 2001
+From: aniruddhgutta <aniruddhgutta@disroot.org>
+Date: Mon, 9 Nov 2026 09:09:09 +0530
+Subject: arrowlake-h enabling
+
+Add Arrow Lake-H (family 6, model 0xC5 / 197) to the supported platform
+table and ship intel_lpmd_config_F6_M197.xml. Rebased from intel/intel-lpmd#121,
+with the WLT state values from spandruvada's config in that thread, and EPP/EPB
+values tweaked to allow intel-lpmd to run alongside tlp properly.
+---
+ data/Makefile.am                   |   1 +
+ data/intel_lpmd_config_F6_M197.xml | 231 +++++++++++++++++++++++++++++
+ src/lpmd_cpu.c                     |   3 +-
+ 3 files changed, 234 insertions(+), 1 deletion(-)
+ create mode 100644 data/intel_lpmd_config_F6_M197.xml
+
 diff --git a/data/Makefile.am b/data/Makefile.am
-index a67bfde..b9a1366 100644
+index 5535874..27c1e41 100644
 --- a/data/Makefile.am
 +++ b/data/Makefile.am
 @@ -32,6 +32,7 @@ lpmd_config_DATA = \
@@ -7,30 +23,28 @@ index a67bfde..b9a1366 100644
  	  intel_lpmd_config_F6_M181.xml \
  	  intel_lpmd_config_F6_M189.xml \
 +	  intel_lpmd_config_F6_M197.xml \
- 	  intel_lpmd_config_F6_M204.xml
- 
- EXTRA_DIST = \
+ 	  intel_lpmd_config_F6_M204.xml \
+ 	  intel_lpmd_config_F6_M213.xml \
+ 	  process_cpuset.xml \
 diff --git a/data/intel_lpmd_config_F6_M197.xml b/data/intel_lpmd_config_F6_M197.xml
 new file mode 100644
-index 0000000..5dd5f35
+index 0000000..0d46c01
 --- /dev/null
 +++ b/data/intel_lpmd_config_F6_M197.xml
-@@ -0,0 +1,244 @@
+@@ -0,0 +1,231 @@
 +<?xml version="1.0"?>
 +
 +<!--
 +Intel Energy Optimizer (LPMD) configuration for Arrow Lake-H
 +(family 6, model 0xC5 / 197).
 +
-+  Performance (PerformanceDef=-1) -> LPMD_OFF  -> all CPUs active
-+  Balanced    (BalancedDef= 0)    -> LPMD_AUTO -> E+L cores only (P-cores parked)
-+  Powersaver  (PowersaverDef= 1)  -> LPMD_ON   -> L-cores only
++Without power-profiles-daemon lpmd runs in AUTO and the *Def values below
++are not consulted. With it they are all -1 (off), as in the other upstream
++configs; set BalancedDef/PowersaverDef to 0 to enable lpmd per profile.
 +
-+Design: P-cores are NEVER used in Balanced mode. All WLT states use
-+ActiveLcores=ALL + ActiveEcores=ALL (topology-portable, not hardcoded
-+CPU numbers). EPP/EPB vary per WLT state to spread the power-performance
-+tradeoff across E+L cores. If the user wants P-cores, they select
-+Performance mode or disable LPMD.
++Design: the P-cores are parked only while the WLT hint reports idle or light
++use (UTIL_BL). Sustained and bursty workloads get every CPU. EPP/EPB vary
++per WLT state.
 +-->
 +
 +<Configuration>
@@ -54,6 +68,9 @@ index 0000000..5dd5f35
 +		0: Cgroup v2
 +		1: Cgroup v2 isolate
 +		2: CPU idle injection
++
++		1 on purpose: Mode 0 sets AllowedCPUs through the systemd
++		manager over sd-bus, Mode 1 writes the cgroup files directly.
 +	-->
 +	<Mode>1</Mode>
 +
@@ -71,7 +88,7 @@ index 0000000..5dd5f35
 +		 1: force on. (Always stay in Low Power Mode)
 +		 0: auto. (opportunistic Low Power Mode enter/exit)
 +	-->
-+	<BalancedDef>0</BalancedDef>
++	<BalancedDef>-1</BalancedDef>
 +
 +	<!--
 +		Default behavior when Power saver setting is used
@@ -79,7 +96,7 @@ index 0000000..5dd5f35
 +		 1: force on. (Always stay in Low Power Mode)
 +		 0: auto. (opportunistic Low Power Mode enter/exit)
 +	-->
-+	<PowersaverDef>1</PowersaverDef>
++	<PowersaverDef>-1</PowersaverDef>
 +
 +	<!--
 +		Use HFI LPM hints
@@ -96,11 +113,17 @@ index 0000000..5dd5f35
 +	<WLTHintEnable>1</WLTHintEnable>
 +
 +	<!--
++		Use WLT Notification delay in milliseconds
++		-1 : default (100 ms)
++	-->
++	<WLTHintNotificationDelay>1024</WLTHintNotificationDelay>
++
++	<!--
 +		Use WLT hint Poll enable
 +		0 : No
 +		1 : Yes
 +	-->
-+	<WLTHintPollEnable>1</WLTHintPollEnable>
++	<WLTHintPollEnable>0</WLTHintPollEnable>
 +
 +	<!--
 +		Use HFI SUV hints
@@ -125,24 +148,18 @@ index 0000000..5dd5f35
 +	<WLTHintMask>15</WLTHintMask>
 +
 +	<!--
-+		Global utilization thresholds (0-100). Used by the legacy
-+		UTIL_POWER fallback path when no per-state <States> config
-+		exists. Since this config defines <States>, these globals
-+		are not consumed — but kept for documentation and in case
-+		the <States> block is removed.
-+
-+		util_entry_threshold: max system-wide load (%) to enter LPM.
-+		util_exit_threshold: max busiest-CPU load (%) to stay in LPM
-+		  (despite the name, it gates entry matching, not exit).
-+		Clearing both disables the util monitor entirely.
-+
-+		Disabled here: in AUTO mode, all states resolve to E+L cores
-+		(P-cores always parked), so load-based exit is unnecessary —
-+		the CPU mask never changes, only EPP/EPB varies by WLT state.
-+
-+		<util_entry_threshold>10</util_entry_threshold>
-+		<util_exit_threshold>95</util_exit_threshold>
++		System utilization threshold to enter LP mode
++		from 0 - 100
++		clear both util_entry_threshold and util_exit_threshold to disable util monitor
 +	-->
++	<util_entry_threshold>10</util_entry_threshold>
++
++	<!--
++		System utilization threshold to exit LP mode
++		from 0 - 100
++		clear both util_entry_threshold and util_exit_threshold to disable util monitor
++	-->
++	<util_exit_threshold>95</util_exit_threshold>
 +
 +	<!--
 +		EntryDelayMS / ExitDelayMS / EntryHystMS / ExitHystMS are
@@ -175,30 +192,21 @@ index 0000000..5dd5f35
 +	-->
 +
 +	<!--
-+		WorkLoad Type hint states for Arrow Lake-H.
++		WorkLoad Type hint states for Arrow Lake-H (6P-8E-2L).
 +
-+		P-cores are NEVER activated in Balanced/AUTO mode. All states
-+		use ActiveLcores=ALL + ActiveEcores=ALL (resolved at runtime to
-+		the actual E+L CPU set) so the mask is topology-portable and
-+		not hardcoded to specific CPU numbers.
-+
-+		EPP/EPB are differentiated per WLT state so E-cores and L-cores
-+		operate on a power-performance spectrum under Speed Shift /
-+		Thread Director control:
-+
-+		  UTIL_IDLE (WLT 0+1): EPP=192 "balance_power", EPB=8
-+		    Idle or unclassified workload. Power-biased but E-cores
-+		    can still respond to light interactive tasks.
++		  UTIL_BL (WLT 0+1): EPP=128, EPB=6
++		    Idle or light use. Only the E and L cores are active
++		    (ActiveLcores=ALL + ActiveEcores=ALL, resolved at runtime
++		    to the actual CPU set, so the mask is not hardcoded to
++		    CPU numbers); the P-cores are parked.
 +
 +		  UTIL_IDLE_SUSTAIN (WLT 2): EPP=64, EPB=4
-+		    Sustained compute. Lets E-cores boost for real work while
-+		    P-cores stay parked.
++		    Sustained compute. All CPUs active (ActiveCPUs=*).
 +
-+		  UTIL_IDLE_BURSTY (WLT 3): EPP=128 "balance_performance", EPB=6
-+		    Bursty spikes. Moderate — E-cores absorb bursts without
-+		    sustaining high power draw.
++		  UTIL_IDLE_BURSTY (WLT 3): EPP=128, EPB=6
++		    Bursty spikes. All CPUs active.
 +
-+		WLTTypeMask=3 on UTIL_IDLE merges WLT=0 (WLT_IDLE / deep idle)
++		WLTTypeMask=3 on UTIL_BL merges WLT=0 (WLT_IDLE / deep idle)
 +		and WLT=1 (WLT_BATTERY_LIFE / light usage) into one state.
 +
 +		WARNING: Do NOT split WLT 0 and 1 into separate states with
@@ -211,14 +219,13 @@ index 0000000..5dd5f35
 +		(ex. 16 CPUs x EPP+EPB = ~32 sysfs writes). The power cost 
 +		of that I/O churn outweighs any benefit from a more aggressive 
 +		EPP during brief WLT=0 moments. If deep idle power savings 
-+		are needed, Power Saver mode (L-cores only, EPP=255) already 
-+		provides that.
++		are needed, set PowersaverDef=1 (L-cores only).
 +
 +		Note on invalid/unexpected WLT values: some platform configs
 +		(e.g. F6_M189) use a wildcard state with no WLTType to
 +		catch all unmatched WLT values including invalid ones. Here,
 +		WLTTypeMask=3 provides targeted handling — WLT 0 and 1 are
-+		explicitly matched to UTIL_IDLE, while invalid or out-of-
++		explicitly matched to UTIL_BL, while invalid or out-of-
 +		range values (e.g. WLT_INVALID=4 from sysfs read failures)
 +		match no state and the daemon holds its current state
 +		unchanged (STATE_NONE in choose_next_state).
@@ -227,41 +234,37 @@ index 0000000..5dd5f35
 +		<CPUFamily> 6 </CPUFamily>
 +		<CPUModel> 197 </CPUModel>
 +		<CPUConfig> * </CPUConfig>
-+		<State>
-+			<ID> 1 </ID>
-+			<Name> UTIL_IDLE </Name>
-+			<WLTTypeMask> 3 </WLTTypeMask>
-+			<ActiveLcores>ALL</ActiveLcores>
-+			<ActiveEcores>ALL</ActiveEcores>
-+			<IRQMigrate>1</IRQMigrate>
-+			<EPP>192</EPP>
-+			<EPB>8</EPB>
-+		</State>
-+		<State>
-+			<ID> 2 </ID>
-+			<Name> UTIL_IDLE_SUSTAIN </Name>
-+			<WLTType> 2 </WLTType>
-+			<ActiveLcores>ALL</ActiveLcores>
-+			<ActiveEcores>ALL</ActiveEcores>
-+			<IRQMigrate>1</IRQMigrate>
-+			<EPP>64</EPP>
-+			<EPB>4</EPB>
-+		</State>
-+		<State>
-+			<ID> 3 </ID>
-+			<Name> UTIL_IDLE_BURSTY </Name>
-+			<WLTType> 3 </WLTType>
-+			<ActiveLcores>ALL</ActiveLcores>
-+			<ActiveEcores>ALL</ActiveEcores>
-+			<IRQMigrate>1</IRQMigrate>
-+			<EPP>128</EPP>
-+			<EPB>6</EPB>
-+		</State>
++   <State>
++   	<ID> 1 </ID>
++   	<n> UTIL_BL </n>
++   	<WLTTypeMask> 3 </WLTTypeMask>
++   	<ActiveLcores>ALL</ActiveLcores>
++   	<ActiveEcores>ALL</ActiveEcores>
++   	<IRQMigrate>1</IRQMigrate>
++   	<EPP>-1</EPP>
++   	<EPB>-1</EPB>
++   </State>
++   <State>
++   	<ID> 2 </ID>
++   	<n> UTIL_IDLE_SUSTAIN </n>
++   	<WLTType> 2 </WLTType>
++   	<ActiveCPUs> * </ActiveCPUs>
++   	<EPP>-1</EPP>
++   	<EPB>-1</EPB>
++   </State>
++   <State>
++   	<ID> 3 </ID>
++   	<n> UTIL_IDLE_BURSTY </n>
++   	<WLTType> 3 </WLTType>
++   	<ActiveCPUs> * </ActiveCPUs>
++   	<EPP>-1</EPP>
++   	<EPB>-1</EPB>
++   </State>
 +	</States>
 +
 +</Configuration>
 diff --git a/src/lpmd_cpu.c b/src/lpmd_cpu.c
-index f4c9cbd..04ec4d1 100644
+index b54d2ca..2c919c3 100644
 --- a/src/lpmd_cpu.c
 +++ b/src/lpmd_cpu.c
 @@ -23,9 +23,10 @@ static struct cpu_model_entry id_table[] = {
@@ -273,6 +276,9 @@ index f4c9cbd..04ec4d1 100644
  		{ 6, 0xbd }, // Lunarlake
  		{ 6, 0xcc }, // Pantherlake
 +		{ 6, 0xc5 }, // Arrowlake H
+ 		{ 6, 0xd5 }, // Wildcatlake
  		{ 0, 0 } // Last Invalid entry
  };
- 
+-- 
+2.43.0
+

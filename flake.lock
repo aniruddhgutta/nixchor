@@ -2,16 +2,16 @@
   "nodes": {
     "community-modules": {
       "locked": {
-        "lastModified": 1793952708,
-        "narHash": "sha256-x9HMpXZT/fylLkMyWBIrXOup9pWMoEWG+Un7OO7cW8A=",
+        "lastModified": 1794198189,
+        "narHash": "sha256-5jYIhcw5Fr7sYsrJrPshNn/6Ot3ekn5oiwRpFeOf2n4=",
         "owner": "aniruddhgutta",
         "repo": "community-modules",
-        "rev": "be0342e3e5f4a656dff3a273a7ce7daabb96d497",
+        "rev": "b041245ee8eaff0a69754ea9be1c5476cef723e6",
         "type": "github"
       },
       "original": {
         "owner": "aniruddhgutta",
-        "ref": "flatpak",
+        "ref": "intel-lpmd",
         "repo": "community-modules",
         "type": "github"
       }
