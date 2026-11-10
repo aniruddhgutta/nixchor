@@ -21,7 +21,7 @@
     gimp
     ffmpeg-headless
     obs-studio
-    davinci-resolve
+    davinci-resolve-studio
 
     # misc apps
     helium

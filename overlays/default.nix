@@ -8,4 +8,7 @@ inputs: [
 
   # adds pkgs.helium to systemPackages (from helium-nix)
   inputs.helium.overlays.default
+
+  # adds davinci-resolve to systemPackages (from resolve)
+  inputs.davinci.overlays.default
 ]

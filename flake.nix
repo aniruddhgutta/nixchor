@@ -14,6 +14,9 @@
       url = "github:aniruddhgutta/helium-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # flake for davinci-resolve-studio (definitely paid)
+    davinci.url = "github:aniruddhgutta/davinci-nix";
   };
 
   outputs =

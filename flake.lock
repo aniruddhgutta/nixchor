@@ -16,13 +16,31 @@
         "type": "github"
       }
     },
+    "davinci": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1794286180,
+        "narHash": "sha256-Mh1NK4aqIzWTkfEp28EmvcYneiw2kNlSdQG2s6CHxLE=",
+        "owner": "aniruddhgutta",
+        "repo": "davinci-nix",
+        "rev": "320fbcc9ef0dc5d33a1f5b244f9db22f384f3060",
+        "type": "github"
+      },
+      "original": {
+        "owner": "aniruddhgutta",
+        "repo": "davinci-nix",
+        "type": "github"
+      }
+    },
     "finix": {
       "locked": {
-        "lastModified": 1794223590,
-        "narHash": "sha256-GbIqbj8Cbq4q9+L92C859AhlTuNnruOadsuv95oiCYI=",
+        "lastModified": 1794263779,
+        "narHash": "sha256-CmGvaT6uIxXUoEX1KeXwnvZ8QbQiEBB7r+htCTs0Z1k=",
         "owner": "finix-community",
         "repo": "finix",
-        "rev": "5c208948fb84f3576c725ff62ecba4cccc92c6eb",
+        "rev": "d18bad0bc20827cdac09c5152366498d1f1dbc41",
         "type": "github"
       },
       "original": {
@@ -38,11 +56,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794041283,
-        "narHash": "sha256-zj2ct7aOSj/SyraVN/Wzshhej56XrHe+NrIr8VKlgDo=",
+        "lastModified": 1794282110,
+        "narHash": "sha256-Q2vBoRce4444JtnbDXv/cxM8UCoQAUB2dv2bXdhUKZc=",
         "owner": "aniruddhgutta",
         "repo": "helium-nix",
-        "rev": "0b3333ca1294bc6397820910eb517464c945b6da",
+        "rev": "80de08c6d142e2f59bdb0e2df82bc3fea822f4b6",
         "type": "github"
       },
       "original": {
@@ -52,6 +70,22 @@
       }
     },
     "nixpkgs": {
+      "locked": {
+        "lastModified": 1793914277,
+        "narHash": "sha256-+xF4oREB1429X2mx/BdcYMwpaleoAErifjmfrxSGS2U=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "bb9df0af54703bcf6566ee48df34bca033672849",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "bb9df0af54703bcf6566ee48df34bca033672849",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
       "locked": {
         "lastModified": 1794042290,
         "narHash": "sha256-ziZn2PvCJE5JEEpqTdxXwJpPB+L3YqoCpTAMCzyaP3U=",
@@ -70,9 +104,10 @@
     "root": {
       "inputs": {
         "community-modules": "community-modules",
+        "davinci": "davinci",
         "finix": "finix",
         "helium": "helium",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs_2"
       }
     }
   },
