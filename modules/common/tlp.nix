@@ -19,7 +19,8 @@
       INTEL_GPU_POWER_PROFILE_ON_BAT = "power_saving";
       RADEON_DPM_PERF_LEVEL_ON_BAT = "low";
 
-      SOUND_POWER_SAVE_ON_BAT = 10;
+      SOUND_POWER_SAVE_ON_BAT = 1;
+      DEVICES_TO_DISABLE_ON_BAT_NOT_IN_USE = [ "bluetooth" ];
 
       PCIE_ASPM_ON_AC = "performance";
       PCIE_ASPM_ON_BAT = "powersupersave";

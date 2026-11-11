@@ -238,8 +238,8 @@ index 0000000..0d46c01
 +   	<ID> 1 </ID>
 +   	<n> UTIL_BL </n>
 +   	<WLTTypeMask> 3 </WLTTypeMask>
-+   	<ActiveLcores>ALL</ActiveLcores>
-+   	<ActiveEcores>ALL</ActiveEcores>
++       <ActiveCPUs>6-7,14-15</ActiveCPUs>
++       <MaxPerfPctDC>E:50</MaxPerfPctDC>
 +   	<IRQMigrate>1</IRQMigrate>
 +   	<EPP>-1</EPP>
 +   	<EPB>-1</EPB>
