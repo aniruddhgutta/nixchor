@@ -37,21 +37,20 @@
     # ref: https://gist.github.com/Blizzke/9bfc3efd835dd607df39cee9cdd7205c
     kernelPackages = pkgs.linuxPackages_6_12;
 
-    # various fixes
+    # force xe driver
     kernelParams = [
-      # workaround for ideapad pro 5 black screening
-      # alt: use kernels <= 6.12-lts
-      # "intel_idle.max_cstate=1"
-
-      # workaround for intel be200 not waking up from sleep
-      # alt: elogind hook to unload and reload iwlwifi module
-      "pcie_port_pm=off"
-
-      # force xe driver, since it's better suited for intel-arc gpus
       "i915.force_probe=!7d51"
       "xe.force_probe=7d51"
     ];
   };
+
+  # workaround for intel be200 not waking up from sleep
+  # ref: https://ratatoskr.run/linux-pci/2026/07/17301729/t
+  services.udev.packages = [
+    (pkgs.writeTextDir "etc/udev/rules.d/60-be200-d3cold.rules" ''
+      ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x8086", ATTR{device}=="0x272b", ATTR{d3cold_allowed}="0"
+    '')
+  ];
 
   # (for testing various freeze-related solutions)
   # programs.modprobe.blacklist = [ "iwlwifi" ];
