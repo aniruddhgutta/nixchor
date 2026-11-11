@@ -15,6 +15,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # flake for chimerautils
+    chimerautils = {
+      url = "github:aniruddhgutta/chimerautils-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # flake for davinci-resolve-studio (definitely paid)
     davinci.url = "github:aniruddhgutta/davinci-nix";
   };

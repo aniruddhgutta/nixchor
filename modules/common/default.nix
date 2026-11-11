@@ -28,8 +28,8 @@
   # set timezone
   time.timeZone = lib.mkDefault "Asia/Kolkata";
 
-  # use busybox for coreutils
-  programs.coreutils.package = pkgs.busybox;
+  # use chimerautils for coreutils
+  programs.coreutils.package = pkgs.chimera-userland;
 
   # set udev-implementation to eudev
   services.udev.enable = true;

@@ -25,7 +25,7 @@ the original idea of user friendly, functional and clean dotfiles.
 | --------- | ------------------------------------------------------- |
 | init      | finit / dinit (user services)                           |
 | boot      | limine (opt: secure-boot)                               |
-| coreutils | busybox                                                 |
+| coreutils | chimerautils                                            |
 | network   | iwd (opt: dhcpcd)                                       |
 | cron      | fcron                                                   |
 | logger    | sysklogd                                                |
@@ -91,6 +91,6 @@ Some experiments I haven't gotten to yet:
 - [ ] switch from `elogind` to `sessiond + zzz`
 - [ ] try out `keventd` and `gardendevd`
 - [ ] explore overlays made by the [finix community](https://discord.gg/nVe5Zkaypg)
-- [ ] package `chimerautils` to replace `busybox`
+- [x] package `chimerautils` to replace `busybox`
 - [ ] restructure repo to allow for drop-in config switches
 - [ ] add a river config aiming to be super minimal

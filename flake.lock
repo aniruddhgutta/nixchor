@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "chimerautils": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1794410958,
+        "narHash": "sha256-h9F9sSamb4xn0fD1uhqdeGy//oiTSkY31HdaLlN76/M=",
+        "owner": "aniruddhgutta",
+        "repo": "chimerautils-nix",
+        "rev": "017aa9a648b819bfe0ecbfba28d1fc0418723509",
+        "type": "github"
+      },
+      "original": {
+        "owner": "aniruddhgutta",
+        "repo": "chimerautils-nix",
+        "type": "github"
+      }
+    },
     "community-modules": {
       "locked": {
         "lastModified": 1794198189,
@@ -103,6 +123,7 @@
     },
     "root": {
       "inputs": {
+        "chimerautils": "chimerautils",
         "community-modules": "community-modules",
         "davinci": "davinci",
         "finix": "finix",

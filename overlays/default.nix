@@ -11,4 +11,7 @@ inputs: [
 
   # adds davinci-resolve to systemPackages (from resolve)
   inputs.davinci.overlays.default
+
+  # adds chimerautils
+  inputs.chimerautils.overlays.default
 ]
