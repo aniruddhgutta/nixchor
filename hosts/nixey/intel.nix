@@ -37,22 +37,36 @@
     # ref: https://gist.github.com/Blizzke/9bfc3efd835dd607df39cee9cdd7205c
     kernelPackages = pkgs.linuxPackages_6_12;
 
-    # force xe driver
     kernelParams = [
+      # force xe driver
       "i915.force_probe=!7d51"
       "xe.force_probe=7d51"
+
+      # enable psr
+      "xe.enable_psr=2"
     ];
   };
 
-  # workaround for intel be200 not waking up from sleep
-  # ref: https://ratatoskr.run/linux-pci/2026/07/17301729/t
   services.udev.packages = [
+    # workaround for intel be200 not waking up from sleep
+    # ref: https://ratatoskr.run/linux-pci/2026/07/17301729/t
     (pkgs.writeTextDir "etc/udev/rules.d/60-be200-d3cold.rules" ''
       ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x8086", ATTR{device}=="0x272b", ATTR{d3cold_allowed}="0"
+    '')
+
+    # drop the unused O2 Micro SD reader (57:00.0): sdhci-pci keeps it and
+    # root port 1c.0 in D0 even with no card, which blocks deep package c-states
+    (pkgs.writeTextDir "etc/udev/rules.d/61-sdreader-remove.rules" ''
+      ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x1217", ATTR{device}=="0x8621", ATTR{remove}="1"
     '')
   ];
 
   # (for testing various freeze-related solutions)
   # programs.modprobe.blacklist = [ "iwlwifi" ];
-  # environment.systemPackages = [ pkgs.pciutils ];
+  # environment.systemPackages = with pkgs; [
+  #   linuxKernel.packages.linux_6_12.turbostat
+  #   pciutils
+  #   perf
+  #   psmisc
+  # ];
 }
