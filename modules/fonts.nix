@@ -6,25 +6,16 @@
 {
   fonts = {
     packages = with pkgs; [
-      # custom
-      iosevka
-      nerd-fonts.symbols-only
-
       # defaults
-      dejavu_fonts
-      liberation_ttf
+      noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-color-emoji
+
+      # monospace
+      iosevka
+      nerd-fonts.symbols-only
     ];
 
-    fontconfig = {
-      enable = true;
-      allowBitmaps = true;
-      defaultFonts.monospace = [
-        "Iosevka"
-        "Symbols Nerd Font"
-      ];
-    };
-
+    fontconfig.enable = true;
   };
 }
