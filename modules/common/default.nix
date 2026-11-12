@@ -20,6 +20,7 @@
   ]
   # note: overlays are imported in nix.nix
   ++ (with modules; [
+    chronyd
     fcron
     getty
   ]);
@@ -35,6 +36,9 @@
 
   # set cron implementation to fcron
   services.fcron.enable = true;
+
+  # enable chrony (timesync)
+  services.chrony.enable = true;
 
   # enable finit's getty
   services.getty.enable = true;
