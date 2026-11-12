@@ -6,19 +6,12 @@
 }:
 
 {
-  imports = with modules; [
-    earlyoom
-    sysklogd
-    zram-swap
-  ];
+  imports = [ modules.sysklogd ];
 
   # kernel
   boot = {
     kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
     kernelParams = [
-      "loglevel=3"
-      "nvme.noacpi=1"
-
       # console color palette (mystbloom)
       "vt.default_red=20,163,154,209,159,205,138,199,61,184,168,216,184,210,160,238"
       "vt.default_grn=20,105,170,190,138,162,156,201,55,134,184,197,164,174,180,238"
@@ -30,23 +23,12 @@
     initrd.emergencyAccess = lib.mkDefault true;
   };
 
-  services = {
-    # enable logging
-    sysklogd = {
-      enable = true;
-      extraConfig = ''
-        rotate_size  1M
-        rotate_count 5
-      '';
-    };
-
-    # enable earlyoom
-    earlyoom = {
-      enable = true;
-      extraArgs = [ "-r" "3600" ];
-    };
-
-    # enable zram
-    zram-swap.enable = lib.mkDefault true;
+  # enable logging
+  services.sysklogd = {
+    enable = true;
+    extraConfig = ''
+      rotate_size  1M
+      rotate_count 5
+    '';
   };
 }

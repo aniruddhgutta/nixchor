@@ -20,9 +20,6 @@
   # enable tailscale
   services.tailscale.enable = true;
 
-  # disable zram-swap
-  services.zram-swap.enable = false;
-
   # disable services from starting on boot
   finit = {
     services.tailscaled.manual-start = lib.mkIf config.services.tailscale.enable true;

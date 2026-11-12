@@ -21,7 +21,6 @@
   # note: overlays are imported in nix.nix
   ++ (with modules; [
     fcron
-    fwupd
     getty
   ]);
 
